@@ -20,7 +20,7 @@ export default class Item extends React.Component {
         const {todo} = this.props
         return (
             <li>
-                {todo.date}&nbsp;{todo.time}&nbsp;&nbsp;{todo.content} 
+                {todo.date}&nbsp;&nbsp;&nbsp;{todo.content} 
                 <Button type="primary" onClick={this.deleteTodo}>删除</Button>
             </li>
         )

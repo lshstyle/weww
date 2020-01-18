@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { DatePicker, TimePicker ,Button,Input ,Form } from 'antd'
 
 
-import '../../pages/todo/todo.less'
+import '../../router/todo/todo.less'
 
 const {TextArea} = Input
 export default class Add extends React.Component {
@@ -18,15 +18,11 @@ export default class Add extends React.Component {
     }
 
     handleDate = (event) => {
-        this.setState(event.target.value)
-    }
-
-    handleTime = (event) => {
-        this.setState(event.target.value)
+        this.setState({date:event.target.value})
     }
 
     handleContent = (event) => {
-        this.setState(event.target.value)
+        this.setState({time:event.target.value})
     } 
     
     addTodo = () => {
@@ -34,7 +30,6 @@ export default class Add extends React.Component {
         this.propTypes.addTodo(todo)
         this.setState({
             date: "",
-            time: "",
             content: ""
         })
     }
@@ -43,8 +38,7 @@ export default class Add extends React.Component {
         return (
             <Form className='form-content'>
                 <Form.Item>
-                <DatePicker  value={date} onChange={this.handleDate}/>
-                <TimePicker  value={time} onChange={this.handleTime}/>
+                <DatePicker showTime  value={date} onChange={this.handleDate}/>
                 </Form.Item>
                 <Form.Item>
                 <TextArea  rows={4} className="form-input" placeholder="请输入内容" 
