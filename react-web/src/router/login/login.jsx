@@ -3,7 +3,7 @@ import React from 'react'
 import {Form, Icon, Input, Button, message} from 'antd'
 
 import './login.less'
-import '../../api/index'
+
 import { reqLogin } from '../../api/index'
 import memoryUtils from '../../utils/memoryUtils'
 import storageUtils from '../../utils/storageUtils'
@@ -16,17 +16,15 @@ class Login extends React.Component {
     handleSubmit = (event) => {
         event.preventDefault()
         const form = this.props.form
-        console.log("handleSubmit()", form.getFieldsValue())
         this.props.form.validateFields(async (err,values) => {
             if (!err) {
-                console.log("提交ajax请求")
                 const {userName, password} = values
                 const response = await reqLogin(userName, password)
                 const user = response.data
                 if (user.status === 0) {
                     message.success("登陆成功")
                     storageUtils.saveUser(user)
-                    this.props.history.replace("/")
+                    return <Redirect to="/" />
                 }
             } else {
                 console.log("校验失败")
@@ -35,7 +33,6 @@ class Login extends React.Component {
     }
 
     validatorPwd = (rule, value, callback) => {
-        console.log(value)
         if (!value) {
             callback("密码不能为空")
         } else {
@@ -45,7 +42,6 @@ class Login extends React.Component {
 
     render() {
         const user = memoryUtils.user
-        console.log(user)
         if (user && user.userName) {
             return (
                 <Redirect to="/" />

@@ -11,7 +11,6 @@ import memoryUtils from './utils/memoryUtils'
 import { BrowserRouter } from 'react-router-dom'
 
 const user = storageUtils.getUser()
-console.log(user)
 memoryUtils.user = user
 
 ReactDOM.render(

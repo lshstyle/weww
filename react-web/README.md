@@ -36,7 +36,3 @@ yarn add react-redux
 13.安装redux
 yarn add redux
 
-14.安装axios
-yarn add axios
-
-
