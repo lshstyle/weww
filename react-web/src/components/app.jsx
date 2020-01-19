@@ -41,8 +41,9 @@ export default class App extends React.Component {
                             <Route path="/chart/line" component={Line} />
                             <Route path="/chart/pie" component={Pie} />
                             <Route path="/system/config" component={Config} />
+                            <Redirect to="/home" />
                         </Switch>
-                        <Redirect to="/home" />
+                        
                     </Content>
                     <Footer style={{textAlign: "center", color: "#ccccc"}}>footer</Footer>
                 </Layout>
