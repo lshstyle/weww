@@ -1,13 +1,13 @@
-import React from 'react' 
-
+import React from 'react'
+import { Redirect } from 'react-router-dom'
 import {Form, Icon, Input, Button, message} from 'antd'
 
 import './login.less'
 
 import { reqLogin } from '../../api/index'
-import memoryUtils from '../../utils/memoryUtils'
-import storageUtils from '../../utils/storageUtils'
-import { Redirect } from 'react-router-dom'
+import memoryUtils from '../../utils/memoryUtil'
+import storageUtils from '../../utils/storageUtil'
+
 
 const Item = Form.Item
 
@@ -19,12 +19,14 @@ class Login extends React.Component {
         this.props.form.validateFields(async (err,values) => {
             if (!err) {
                 const {userName, password} = values
-                const response = await reqLogin(userName, password)
-                const user = response.data
+                //const response = await reqLogin(userName, password)
+                //const user = response.data
+                const user = {status:0, userName:"admin"}
                 if (user.status === 0) {
                     message.success("登陆成功")
                     storageUtils.saveUser(user)
-                    return <Redirect to="/" />
+                    alert(JSON.stringify(this.props.history))
+                    this.props.history.replace("/home")
                 }
             } else {
                 console.log("校验失败")

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import memoryUtils from '../../utils/memoryUtils'
+import memoryUtils from '../../utils/memoryUtil'
 
 export default class Home extends React.Component {
 

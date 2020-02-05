@@ -36,3 +36,12 @@ yarn add react-redux
 13.安装redux
 yarn add redux
 
+14.安装axios
+yarn add axios
+
+15.安装store
+yarn add store
+
+16.安装jsonp
+yarn add jsonp
+
