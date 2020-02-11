@@ -4,6 +4,12 @@ import {Route,Switch, BrowserRouter} from 'react-router-dom'
 import Login from '../router/login/login'
 import Main from '../router/main/main'
 
+import storageUtil from '../utils/storageUtil'
+import memoryUtil from '../utils/memoryUtil'
+
+const user = storageUtil.getUser()
+memoryUtil.user = user
+
 export default class App extends React.Component {
 
     render() {

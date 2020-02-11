@@ -4,6 +4,21 @@ const menuList = [{
     icon: "home"
 },
 {
+    title: "商品管理",
+    key: "/product",
+    icon: "control",
+    child:[{
+        title: "品类管理",
+        key: "/product/category",
+        icon: "tag"
+    },
+    {
+        title: "商品管理",
+        key: "/product/goods",
+        icon: "ordered-list"
+    }]
+},
+{
     title: "用户管理",
     key: "/user",
     icon: "user"
@@ -11,7 +26,7 @@ const menuList = [{
 {
     title: "角色管理",
     key: "/role",
-    icon: "safety"
+    icon: "security-scan"
 },
 {
     title: "图形图标",

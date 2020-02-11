@@ -5,8 +5,8 @@ import {Form, Icon, Input, Button, message} from 'antd'
 import './login.less'
 
 import { reqLogin } from '../../api/index'
-import memoryUtils from '../../utils/memoryUtil'
-import storageUtils from '../../utils/storageUtil'
+import memoryUtil from '../../utils/memoryUtil'
+import storageUtil from '../../utils/storageUtil'
 
 
 const Item = Form.Item
@@ -24,12 +24,13 @@ class Login extends React.Component {
                 const user = {status:0, userName:"admin"}
                 if (user.status === 0) {
                     message.success("登陆成功")
-                    storageUtils.saveUser(user)
-                    alert(JSON.stringify(this.props.history))
-                    this.props.history.replace("/home")
+                    storageUtil.saveUser(user)
+                    memoryUtil.user = user
+                    this.props.history.replace("/")
+                    
                 }
             } else {
-                console.log("校验失败")
+                message.error("登陆成功")
             }
         })
     }
@@ -43,7 +44,7 @@ class Login extends React.Component {
     }
 
     render() {
-        const user = memoryUtils.user
+        const user = memoryUtil.user
         if (user && user.userName) {
             return (
                 <Redirect to="/" />

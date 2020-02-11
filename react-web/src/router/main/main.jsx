@@ -6,6 +6,8 @@ import memoryUtils from '../../utils/memoryUtil'
 import LeftNav from '../../components/left-nav/index'
 import Header from '../../components/header/index'
 import Home from '../home/home'
+import Goods from '../product/goods'
+import Category from '../product/category'
 import User from '../user/user'
 import Role from '../role/role'
 import Bar from '../chart/bar'
@@ -34,6 +36,8 @@ export default class App extends React.Component {
                     <Content style={{margin:20,backgroundColor: "#fff"}}>
                         <Switch>
                             <Route path="/home" component={Home} />
+                            <Route path="/product/category" component={Category} />
+                            <Route path="/product/goods" component={Goods} />
                             <Route path="/user" component={User} />
                             <Route path="/role" component={Role} />
                             <Route path="/chart/bar" component={Bar} />

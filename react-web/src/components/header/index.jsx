@@ -6,8 +6,9 @@ import "./index.less"
 import {formatDate} from "../../utils/dateUtil"
 import memoryUtil from "../../utils/memoryUtil"
 import storageUtil from "../../utils/storageUtil"
-import {reqWeather} from "../../api/index"
+import {reqWeather} from "../../api"
 import menuList from "../../config/menu"
+import LinkButton from "../link-button"
 
 class Header extends React.Component {
 
@@ -74,7 +75,7 @@ class Header extends React.Component {
             <div className="header">
                 <div className="header-top">
                     <span>欢迎，{userName}</span>
-                    <a href="#" onClick={this.logout}>退出</a>
+                    <LinkButton onClick={this.logout}>退出</LinkButton>
                 </div>
                 <div className="header-bottom">
                     <div className="header-bottom-left">{title}</div>
