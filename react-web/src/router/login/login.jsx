@@ -19,9 +19,9 @@ class Login extends React.Component {
         this.props.form.validateFields(async (err,values) => {
             if (!err) {
                 const {userName, password} = values
-                //const response = await reqLogin(userName, password)
-                //const user = response.data
-                const user = {status:0, userName:"admin"}
+                // const response = await reqLogin(userName, password)
+                // const user = response.data
+                 const user = {status:0, userName:"admin"}
                 if (user.status === 0) {
                     message.success("登陆成功")
                     storageUtil.saveUser(user)
