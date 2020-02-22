@@ -2,13 +2,13 @@ import ajax from './ajax'
 import jsonp from 'jsonp'
 import {message} from 'antd'
 
-export const reqLogin = (userName, passwd) => ajax("/login/getUserInfo", {userName, passwd}, "GET")
+export const reqLogin = (userName, passwd) => ajax('/login/getUserInfo', {userName, passwd}, 'GET')
 
-export const reqCategorys = (parentId) => ajax("/category/list", {parentId})
+export const reqCategorys = (parentId) => ajax('/category/list', {parentId})
 
-export const reqCategoryAdd = (categoryName, parentId) => ajax("/category/add", {categoryName, parentId}, "POST")
+export const reqCategoryAdd = (categoryName, parentId) => ajax('/category/add', {categoryName, parentId}, 'POST')
 
-export const reqCategoryUpdate = ({categoryName, categoryId}) => ajax("/category/update", {categoryName, categoryId}, "POST")
+export const reqCategoryUpdate = ({categoryName, categoryId}) => ajax('/category/update', {categoryName, categoryId}, 'POST')
 
 export const reqWeather = (city) => {
     return new Promise((resolve, reject) => {

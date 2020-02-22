@@ -12,9 +12,9 @@ export default class Add extends React.Component {
     }
 
     state = {
-        date: "",
-        time: "",
-        content: ""
+        date: '',
+        time: '',
+        content: ''
     }
 
     handleDate = (event) => {
@@ -29,8 +29,8 @@ export default class Add extends React.Component {
         const todo = this.state
         this.propTypes.addTodo(todo)
         this.setState({
-            date: "",
-            content: ""
+            date: '',
+            content: ''
         })
     }
     render() {
@@ -41,11 +41,11 @@ export default class Add extends React.Component {
                 <DatePicker showTime  value={date} onChange={this.handleDate}/>
                 </Form.Item>
                 <Form.Item>
-                <TextArea  rows={4} className="form-input" placeholder="请输入内容" 
+                <TextArea  rows={4} className='form-input' placeholder='请输入内容' 
                 value={content} onChange={this.handleContent}/>
                 </Form.Item>
                 <Form.Item>
-                <Button type="primary" className="form-button" onClick={this.addTodo}>添加</Button>
+                <Button type='primary' className='form-button' onClick={this.addTodo}>添加</Button>
                 </Form.Item>
             </Form>
         )

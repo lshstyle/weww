@@ -3,8 +3,8 @@ import {Menu, Icon} from 'antd'
 import {Link, withRouter} from 'react-router-dom'
 import menus from '../../config/menu'
 
-import "./index.less"
-import logo from "../../assets/images/favicon.ico"
+import './index.less'
+import logo from '../../assets/images/favicon.ico'
 
 const {SubMenu} = Menu
 
@@ -88,14 +88,14 @@ class LeftNav extends React.Component {
         const path = this.props.location.pathname
         const openKey = this.openKey
         return (
-            <div className="left-nav">
-                <Link to="/" className="left-nav-header">
-                    <img src={logo} alt="图标"/>
+            <div className='left-nav'>
+                <Link to='/' className='left-nav-header'>
+                    <img src={logo} alt='图标'/>
                     <h1>管理系统</h1>
                 </Link>
                 <Menu
-                    mode="inline"
-                    theme="dark"
+                    mode='inline'
+                    theme='dark'
                     selectedKeys={[path]}
                     defaultOpenKeys={[openKey]}
                 >

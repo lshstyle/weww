@@ -2,13 +2,13 @@ import React from 'react'
 import {withRouter} from 'react-router-dom'
 import {Modal} from 'antd'
 
-import "./index.less"
-import {formatDate} from "../../utils/dateUtil"
-import memoryUtil from "../../utils/memoryUtil"
-import storageUtil from "../../utils/storageUtil"
-import {reqWeather} from "../../api"
-import menuList from "../../config/menu"
-import LinkButton from "../link-button"
+import './index.less'
+import {formatDate} from '../../utils/dateUtil'
+import memoryUtil from '../../utils/memoryUtil'
+import storageUtil from '../../utils/storageUtil'
+import {reqWeather} from '../../api'
+import menuList from '../../config/menu'
+import LinkButton from '../link-button'
 
 class Header extends React.Component {
 
@@ -58,7 +58,7 @@ class Header extends React.Component {
             onOk: () => {
               memoryUtil.user = {}
               storageUtil.removeUser()
-              this.props.history.replace("/login")
+              this.props.history.replace('/login')
             },
           })
     }
@@ -72,16 +72,16 @@ class Header extends React.Component {
         const userName = memoryUtil.user.userName
         const title = this.getTitle()
         return (
-            <div className="header">
-                <div className="header-top">
+            <div className='header'>
+                <div className='header-top'>
                     <span>欢迎，{userName}</span>
                     <LinkButton onClick={this.logout}>退出</LinkButton>
                 </div>
-                <div className="header-bottom">
-                    <div className="header-bottom-left">{title}</div>
-                    <div className="header-bottom-right">
+                <div className='header-bottom'>
+                    <div className='header-bottom-left'>{title}</div>
+                    <div className='header-bottom-right'>
                         <span>{currTime}</span>
-                        <img src={dayPictureUrl} alt="天气"/>
+                        <img src={dayPictureUrl} alt='天气'/>
                         <span>{weather}</span>
                     </div>
                 </div>

@@ -1,0 +1,18 @@
+{
+    "search.followSymlinks": false,
+    "git.decorations.enabled": false,
+    "git.enabled": false,
+    "git.autorefresh": false,
+    "git.confirmSync": false,
+    "git.suggestSmartCommit": false,
+    "git.detectSubmodules": false,
+    "git.enableStatusBarSync": false,
+    "git.showProgress": false,
+    "git.confirmEmptyCommits": false,
+    "javascript.format.enable": false,
+    "git.showInlineOpenFileAction": false,
+    "git.openDiffOnClick": false,
+    "editor.lightbulb.enabled": false,
+    "git.confirmForcePush": false,
+    "git.pullTags": false
+}

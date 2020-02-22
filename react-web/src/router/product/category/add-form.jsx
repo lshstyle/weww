@@ -37,7 +37,7 @@ class AddForm extends React.Component {
                         getFieldDecorator('categoryName', {
                             initialValue: '',
                             rules: [{
-                                required: true, message: "分类名称必须输入"
+                                required: true, message: '分类名称必须输入'
                             }]
                         })(
                             <Input placeholder='请输入分类名称' />

@@ -23,32 +23,32 @@ export default class App extends React.Component {
         const user = memoryUtils.user
         if (!user || !user.userName) {
             return (
-                <Redirect to="/login" />
+                <Redirect to='/login' />
             )
         }
         return (
-            <Layout style={{width:"100%", height:"100%"}}>
+            <Layout style={{width:'100%', height:'100%'}}>
                 <Sider>
                     <LeftNav/>
                 </Sider>
                 <Layout>
                     <Header></Header>
-                    <Content style={{margin:20,backgroundColor: "#fff"}}>
+                    <Content style={{margin:20,backgroundColor: '#fff'}}>
                         <Switch>
-                            <Route path="/home" component={Home} />
-                            <Route path="/product/category" component={Category} />
-                            <Route path="/product/goods" component={Goods} />
-                            <Route path="/user" component={User} />
-                            <Route path="/role" component={Role} />
-                            <Route path="/chart/bar" component={Bar} />
-                            <Route path="/chart/line" component={Line} />
-                            <Route path="/chart/pie" component={Pie} />
-                            <Route path="/system/config" component={Config} />
-                            <Redirect to="/home" />
+                            <Route path='/home' component={Home} />
+                            <Route path='/product/category' component={Category} />
+                            <Route path='/product' component={Goods} />
+                            <Route path='/user' component={User} />
+                            <Route path='/role' component={Role} />
+                            <Route path='/chart/bar' component={Bar} />
+                            <Route path='/chart/line' component={Line} />
+                            <Route path='/chart/pie' component={Pie} />
+                            <Route path='/system/config' component={Config} />
+                            <Redirect to='/home' />
                         </Switch>
                         
                     </Content>
-                    <Footer style={{textAlign: "center", color: "#ccccc"}}>footer</Footer>
+                    <Footer style={{textAlign: 'center', color: '#ccccc'}}>footer</Footer>
                 </Layout>
             </Layout>
         )

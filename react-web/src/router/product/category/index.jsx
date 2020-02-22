@@ -36,83 +36,83 @@ export default class Category extends React.Component {
         result = {
             status: 0,
             data: [{
-                        name:"手机",
-                        status:"启用",
-                        id: "1"
+                        name:'手机',
+                        status:'启用',
+                        id: '1'
                     },
                     {
-                        name:"电脑", 
-                        status:"停用",
-                        id: "2"
+                        name:'电脑', 
+                        status:'停用',
+                        id: '2'
                     },
                     {
-                        name:"图书", 
-                        status:"停用",
-                        id: "3"
+                        name:'图书', 
+                        status:'停用',
+                        id: '3'
                     },
                     {
-                        name:"食品", 
-                        status:"停用",
-                        id: "4"
+                        name:'食品', 
+                        status:'停用',
+                        id: '4'
                     },
                     {
-                        name:"服装", 
-                        status:"停用",
-                        id: "5"
+                        name:'服装', 
+                        status:'停用',
+                        id: '5'
                     },
                     {
-                        name:"玩具", 
-                        status:"停用",
-                        id: "6"
+                        name:'玩具', 
+                        status:'停用',
+                        id: '6'
                     },
                     {
-                        name:"箱包", 
-                        status:"停用",
-                        id: "7"
+                        name:'箱包', 
+                        status:'停用',
+                        id: '7'
                     },
                     {
-                        name:"居家", 
-                        status:"停用",
-                        id: "8"
+                        name:'居家', 
+                        status:'停用',
+                        id: '8'
                     },
                     {
-                        name:"房产", 
-                        status:"停用",
-                        id: "9"
+                        name:'房产', 
+                        status:'停用',
+                        id: '9'
                     },
                     {
-                        name:"母婴", 
-                        status:"停用",
-                        id: "10"
+                        name:'母婴', 
+                        status:'停用',
+                        id: '10'
                     },
                     {
-                        name:"电器", 
-                        status:"停用",
-                        id: "11"
+                        name:'电器', 
+                        status:'停用',
+                        id: '11'
                     }]
             }
        } else {
         result = {
             status: 0,
             data: [{
-                        name:"电视机",
-                        status:"启用",
-                        id: "1"
+                        name:'电视机',
+                        status:'启用',
+                        id: '1'
                     },
                     {
-                        name:"电冰箱", 
-                        status:"停用",
-                        id: "2"
+                        name:'电冰箱', 
+                        status:'停用',
+                        id: '2'
                     },
                     {
-                        name:"洗衣机", 
-                        status:"停用",
-                        id: "3"
+                        name:'洗衣机', 
+                        status:'停用',
+                        id: '3'
                     },
                     {
-                        name:"空调", 
-                        status:"停用",
-                        id: "4"
+                        name:'空调', 
+                        status:'停用',
+                        id: '4'
                     }]
             }
        }
@@ -126,25 +126,25 @@ export default class Category extends React.Component {
                this.setState({subCategorys:categorys})
            }
        } else {
-           message.error("获取分类列表失败")
+           message.error('获取分类列表失败')
        }
        this.setState({loading:false})
     }
 
     initColumns = () => {
         this.columns = [{
-                            title:"分类名称",
-                            dataIndex:"name",
-                            width:"60%"
+                            title:'分类名称',
+                            dataIndex:'name',
+                            width:'60%'
                         },
                         {
-                            title:"状态", 
-                            dataIndex:"status",
-                            width:"20%"
+                            title:'状态', 
+                            dataIndex:'status',
+                            width:'20%'
                         },
                         {
-                            title:"操作",
-                            width:"20%",
+                            title:'操作',
+                            width:'20%',
                             render: (category) => (
                                 <div>
                                     <LinkButton onClick={()=>this.showUpdateModal(category)}>修改分类</LinkButton>
@@ -246,7 +246,7 @@ export default class Category extends React.Component {
         const title = parentId === '0'? '一级分类列表' :(
             <span>
                 <LinkButton onClick={this.showCategorys}>一级分类列表</LinkButton>
-                <Icon type="arrow-right" style={{margin: "0 10px"}}/>
+                <Icon type='arrow-right' style={{margin: '0 10px'}}/>
                 <span>{parentName}</span>
             </span>
         )
@@ -260,11 +260,11 @@ export default class Category extends React.Component {
                 <Table columns={this.columns} 
                        dataSource={parentId==='0'? categorys: subCategorys} 
                        bordered 
-                       rowKey="id"
+                       rowKey='id'
                        loading={loading}
                        pagination={{defaultPageSize: 5, showQuickJumper: true}}/>
                 <Modal
-                    title="添加分类"
+                    title='添加分类'
                     visible={this.state.showStatus === 1}
                     onOk={this.addCategory}
                     onCancel={this.handleCancel}
@@ -276,7 +276,7 @@ export default class Category extends React.Component {
                     />
                 </Modal>
                 <Modal
-                    title="修改分类"
+                    title='修改分类'
                     visible={this.state.showStatus === 2}
                     onOk={this.updateCategory}
                     onCancel={this.handleCancel}

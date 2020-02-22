@@ -21,7 +21,7 @@ export default class Item extends React.Component {
         return (
             <li>
                 {todo.date}&nbsp;&nbsp;&nbsp;{todo.content} 
-                <Button type="primary" onClick={this.deleteTodo}>删除</Button>
+                <Button type='primary' onClick={this.deleteTodo}>删除</Button>
             </li>
         )
     }
