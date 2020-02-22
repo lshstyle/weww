@@ -2,7 +2,7 @@ import React from 'react'
 import { Redirect } from 'react-router-dom'
 import {Form, Icon, Input, Button, message} from 'antd'
 
-import './login.less'
+import './index.less'
 
 import { reqLogin } from '../../api/index'
 import memoryUtil from '../../utils/memoryUtil'

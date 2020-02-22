@@ -1,8 +1,8 @@
 import React from 'react'
 import {Route,Switch, BrowserRouter} from 'react-router-dom'
 
-import Login from '../router/login/login'
-import Main from '../router/main/main'
+import Login from '../router/login'
+import Main from '../router/main'
 
 import storageUtil from '../utils/storageUtil'
 import memoryUtil from '../utils/memoryUtil'

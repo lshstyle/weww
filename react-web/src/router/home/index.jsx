@@ -1,7 +1,7 @@
 import React from 'react'
 
 import memoryUtils from '../../utils/memoryUtil'
-import './home.less'
+import './index.less'
 
 export default class Home extends React.Component {
 
