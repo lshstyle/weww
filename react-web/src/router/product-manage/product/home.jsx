@@ -10,7 +10,9 @@ export default class ProductHome extends React.Component {
         products: [],
         total: 0,
         defaultPageSize: 5,
-        loading: false
+        loading: false,
+        searchName: '',
+        searchType: 'name'
     }
 
     initColumns = () => {
@@ -58,8 +60,8 @@ export default class ProductHome extends React.Component {
 
     getProducts = async (pageNum) => {
         this.setState({loading:true})
-        const {defaultPageSize} = this.state
-        const result = await reqProducts(pageNum, defaultPageSize)
+        const {defaultPageSize, searchType, searchName} = this.state
+        const result = await reqProducts(pageNum, defaultPageSize,searchType, searchName)
         this.setState({loading:false})
         if (result.code === httpStatus.SEARCH) {
             const products = result.data
@@ -77,15 +79,17 @@ export default class ProductHome extends React.Component {
     }
 
     render() {
-        const {products, defaultPageSize, total,loading} = this.state
+        const {products, defaultPageSize, total,loading, searchType,searchName} = this.state
         const title = (
             <span>
-                <Select value='1' style={{width:150}}>
-                    <option value='1'>按名称搜索</option>
-                    <option value='2'>按描述搜索</option>
+                <Select value={searchType} style={{width:150}} 
+                        onChange={value => this.setState({searchType:value})}>
+                    <option value='name'>按名称搜索</option>
+                    <option value='desc'>按描述搜索</option>
                 </Select>
-                <Input placeholder='关键字'  style={{width:150,margin: '0 15px'}}/>
-                <Button  type='primary' >搜索</Button>
+                <Input placeholder='关键字'  style={{width:150,margin: '0 15px'}} value={searchName} 
+                        onChange={event => this.setState({searchName: event.target.value})}/>
+                <Button  type='primary' onClick={() => {this.getProducts(1)}}>搜索</Button>
             </span>
             )
         const extra = (
