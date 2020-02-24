@@ -23,8 +23,7 @@ const {Footer, Sider, Content} = Layout
 export default class App extends React.Component {
     
     getMenus = async () => {
-        const response = await reqMenu()
-        const result = response.data
+        const result = await reqMenu()
         if (result.code === httpStatus.SEARCH) {
             storageUtil.saveMenus(result.data)
             memoryUtil.menus = result.data

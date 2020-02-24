@@ -21,4 +21,8 @@
   <update id="update">
   	update t_category set f_name=#{categoryName} where f_id = #{categoryId}
   </update>
+  
+  <delete id="delete">
+  	delete  from t_category where f_id = #{categoryId}
+  </delete>
 </mapper>

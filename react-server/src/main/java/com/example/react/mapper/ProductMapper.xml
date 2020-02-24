@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.react.mapper.ProductMapper">
+  <resultMap id="BaseResultMap" type="com.example.react.entity.Product">
+   
+    <id column="f_id" jdbcType="VARCHAR" property="id" />
+    <result column="f_name" jdbcType="VARCHAR" property="name" />
+    <result column="f_desc" jdbcType="VARCHAR" property="desc" />
+    <result column="f_price" jdbcType="DECIMAL" property="price" />
+    <result column="f_img" jdbcType="DECIMAL" property="img" />
+    <result column="f_status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  
+  <select id="list" resultMap="BaseResultMap">
+    select f_id, f_name, f_desc,f_img, f_price, f_status 
+    from t_product
+    where 1=1
+    <if test="product.desc != null and product.desc != ''">
+       and f_desc like CONCAT ('%', #{product.desc}, '%')
+    </if>
+    <if test="product.name != null and product.name != ''">
+    	and f_name like CONCAT ('%', #{product.name}, '%')
+    </if>
+  </select>
+</mapper>

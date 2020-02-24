@@ -3,7 +3,7 @@ import {Card, Table, Button, Icon, message, Modal} from 'antd'
 
 
 import  LinkButton from '../../../components/link-button'
-import {reqCategorys,reqCategoryUpdate,reqCategoryAdd} from '../../../api'
+import {reqCategorys,reqCategoryUpdate,reqCategoryAdd, reqCategoryDelete} from '../../../api'
 import AddForm from './add-form'
 import UpdateForm from './update-form'
 import httpStatus from '../../../utils/httpStatus'
@@ -31,8 +31,7 @@ export default class Category extends React.Component {
     getCategorys = async (parentId) => {
         this.setState({loading:true})
         parentId = parentId || this.state.parentId 
-       const response = await reqCategorys(parentId)
-       const result = response.data
+       const result = await reqCategorys(parentId)
        if (result.code === httpStatus.SEARCH) {
            const categorys = result.data
            
@@ -56,16 +55,16 @@ export default class Category extends React.Component {
                         {
                             title:'状态', 
                             dataIndex:'status',
-                            width:'20%'
+                            width:'10%'
                         },
                         {
                             title:'操作',
-                            width:'20%',
+                            width:'30%',
                             render: (category) => (
                                 <div>
                                     <LinkButton onClick={()=>this.showUpdateModal(category)}>修改分类</LinkButton>
                                     {this.state.parentId === '0'? <LinkButton onClick={()=>{this.showSubCategorys(category)}}>查看子分类</LinkButton> : null}
-                                    
+                                    <LinkButton onClick={()=> this.deleteCategory(category)}>删除分类</LinkButton>
                                 </div>
                             )
                         }]
@@ -87,6 +86,19 @@ export default class Category extends React.Component {
     showUpdateModal = (category) => {
         this.category = category 
         this.setState({showStatus: 2})
+    }
+
+    deleteCategory =  (category) => {
+        const categoryId = category.id
+        Modal.confirm({
+            content: '确定删除【' + category.name +'】吗？',
+            onOk: async () => {
+                const  result = await reqCategoryDelete(categoryId)
+                if (result.code === httpStatus.DELETE) {
+                    this.getCategorys()
+                } 
+            },
+          })
     }
 
     showCategorys = () => {
@@ -116,8 +128,7 @@ export default class Category extends React.Component {
                 //2.发请求
                 const {parentId,categoryName} = values
                 this.form.resetFields()
-                const  response = await reqCategoryAdd(categoryName,parentId)
-                const result = response.data
+                const  result = await reqCategoryAdd(categoryName,parentId)
                 if (result.code === httpStatus.ADD) {
                     if (parentId === this.state.parentId) {
                         this.getCategorys()
@@ -143,8 +154,7 @@ export default class Category extends React.Component {
                 const categoryId = this.category.id
                 const {categoryName} = values
                 this.form.resetFields()
-                const  response = await reqCategoryUpdate({categoryId, categoryName})
-                const result = response.data
+                const  result = await reqCategoryUpdate({categoryId, categoryName})
                 if (result.code === httpStatus.UPDATE) {
                     this.getCategorys()
                 } 

@@ -3,15 +3,19 @@ import jsonp from 'jsonp'
 import {message} from 'antd'
 
 
-export const reqLogin = (userName, passwd) => ajax('/login/getUserInfo', {userName, passwd}, 'GET')
+export const reqLogin = (userName, passwd) => ajax('/login/getUserInfo', {userName, passwd})
 
-export const reqMenu = () => ajax('/menu/list', {}, 'GET')
+export const reqMenu = () => ajax('/menu/list', {})
 
 export const reqCategorys = (parentId) => ajax('/category/list', {parentId})
 
 export const reqCategoryAdd = (categoryName, parentId) => ajax('/category/add', {name:categoryName, parentId:parentId}, 'POST')
 
 export const reqCategoryUpdate = ({categoryName, categoryId}) => ajax('/category/update', {name:categoryName, id:categoryId}, 'POST')
+
+export const reqCategoryDelete = (categoryId) => ajax('/category/delete', {id:categoryId})
+
+export const reqProducts = (pageNum, pageSize, name, desc) => ajax('/product/list', {pageNum, pageSize, name, desc})
 
 export const reqWeather = (city) => {
     return new Promise((resolve, reject) => {

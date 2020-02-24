@@ -26,4 +26,8 @@ public class CategoryServiceImpl  implements CategoryService{
 	public void update (String categoryId, String categoryName) {
 		categoryMapper.update(categoryId, categoryName);
 	}
+	
+	public void delete (String categoryId) {
+		categoryMapper.delete(categoryId);
+	}
 }

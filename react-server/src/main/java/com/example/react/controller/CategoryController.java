@@ -42,4 +42,10 @@ public class CategoryController {
 		categoryService.update(category.getId(), category.getName());
 		return new Result(HttpStatus.UPDATE);
 	}
+	
+	@GetMapping("/delete")
+	public Result delete(@RequestParam("id") String categoryId) {
+		categoryService.delete(categoryId);
+		return new Result(HttpStatus.DELETE);
+	}
 }
