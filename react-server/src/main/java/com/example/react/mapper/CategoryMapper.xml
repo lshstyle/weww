@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.react.mapper.CategoryMapper">
+  <resultMap id="BaseResultMap" type="com.example.react.entity.Category">
+   
+    <id column="f_id" jdbcType="VARCHAR" property="id" />
+    <result column="f_name" jdbcType="VARCHAR" property="name" />
+    <result column="f_parent_id" jdbcType="VARCHAR" property="parentId" />
+    <result column="f_status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  
+  <select id="list" resultMap="BaseResultMap">
+    select f_id, f_name, f_parent_id, case when f_status='1' then '启用'  else '停用' end f_status from t_category where f_parent_id = #{parentId}
+  </select>
+  
+  <insert id="add">
+  	insert into t_category (f_id, f_name,f_parent_id, f_status)
+  	values (replace(uuid(), '-', ''), #{categoryName}, #{parentId}, '1')
+  </insert>
+  
+  <update id="update">
+  	update t_category set f_name=#{categoryName} where f_id = #{categoryId}
+  </update>
+</mapper>

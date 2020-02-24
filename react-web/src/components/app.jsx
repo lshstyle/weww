@@ -8,7 +8,9 @@ import storageUtil from '../utils/storageUtil'
 import memoryUtil from '../utils/memoryUtil'
 
 const user = storageUtil.getUser()
+const menus = storageUtil.getMenus()
 memoryUtil.user = user
+memoryUtil.menus = menus
 
 export default class App extends React.Component {
 

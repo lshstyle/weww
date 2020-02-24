@@ -1,54 +1,24 @@
 import React from 'react'
-import {Menu, Icon} from 'antd'
+import {Menu, Icon, message} from 'antd'
 import {Link, withRouter} from 'react-router-dom'
-import menus from '../../config/menu'
 
 import './index.less'
 import logo from '../../assets/images/favicon.ico'
+import {reqMenu} from '../../api'
+import memoryUtil from '../../utils/memoryUtil'
 
 const {SubMenu} = Menu
 
 
 class LeftNav extends React.Component {
 
-    // getMenuNodes = (menus) => {
-    //     return menus.map((menu, index) => {
-    //        if (!menu.child) {
-    //             return (
-    //                 <Menu.Item key={menu.key}>
-    //                     <Link to={menu.key}>
-    //                         <span>
-    //                             <Icon type={menu.icon} />
-    //                             <span>{menu.title}</span>
-    //                         </span>
-    //                     </Link>
-    //                 </Menu.Item>
-    //             )
-    //        } else {
-    //            return (
-    //             <SubMenu key={menu.key}
-    //                     title={
-    //                     <span>
-    //                         <Icon type={menu.icon} />
-    //                     <span>{menu.title}</span>
-    //                     </span>
-    //                     }
-    //             >
-    //                {this.getMenuNodes(menu.child)}
-    //             </SubMenu>
-    //            )
-    //        }
-    //     })
-    // }
-
-    getMenuNodes = (menus) => {
-        
+    showMenuNodes = (menus) => {
         const path = this.props.location.pathname
         return menus.reduce((pre, menu) => {
             if (!menu.child) {
                 pre.push(
-                    <Menu.Item key={menu.key}>
-                        <Link to={menu.key}>
+                    <Menu.Item key={menu.path}>
+                        <Link to={menu.path}>
                             <span>
                                 <Icon type={menu.icon} />
                                 <span>{menu.title}</span>
@@ -58,20 +28,22 @@ class LeftNav extends React.Component {
                 )
                 
             } else {
-                const cItem = menu.child.find(item => item.key === path)
+                const cItem = menu.child.find(item => item.path === path)
                 if (cItem) {
-                    this.openKey = menu.key
+                    this.openKey = menu.path
                 }
                 pre.push(
-                    <SubMenu key={menu.key}
+                    <SubMenu key={menu.path}
                             title={
                             <span>
                                 <Icon type={menu.icon} />
-                            <span>{menu.title}</span>
+                                <span>{menu.title}</span>
                             </span>
                             }
                     >
-                    {this.getMenuNodes(menu.child)}
+                    {
+                        this.showMenuNodes(menu.child)
+                    }
                     </SubMenu>
                 )
             }
@@ -80,11 +52,12 @@ class LeftNav extends React.Component {
     }
 
     componentWillMount() {
-        this.menuNodes = this.getMenuNodes(menus)
+        
+        const menus = memoryUtil.menus
+        this.menuNodes = this.showMenuNodes(menus)
     }
 
     render() {
-        
         const path = this.props.location.pathname
         const openKey = this.openKey
         return (

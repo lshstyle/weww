@@ -2,6 +2,7 @@
 import store from 'store'
 
 const USER_KEY = 'user_key'
+const MENUS_KEY = 'menus_key'
 export default {
     
     saveUser(user) {
@@ -14,5 +15,18 @@ export default {
 
     removeUser() {
         store.remove(USER_KEY)
+    },
+
+    saveMenus(menus) {
+        store.set(MENUS_KEY, menus)
+    },
+
+    getMenus() {
+        return store.get(MENUS_KEY) || []
+    },
+    
+    removeMenus() {
+        store.remove(MENUS_KEY)
     }
+
 }

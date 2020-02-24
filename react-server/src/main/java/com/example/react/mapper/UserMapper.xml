@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.react.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.example.react.entity.User">
+   
+    <id column="f_id" jdbcType="VARCHAR" property="id" />
+    <result column="f_name" jdbcType="VARCHAR" property="name" />
+    <result column="f_real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="f_sex" jdbcType="VARCHAR" property="sex" />
+    <result column="f_passwd" jdbcType="INTEGER" property="passwd" />
+  </resultMap>
+  
+  <select id="getUserInfo" resultMap="BaseResultMap">
+    select f_id, f_name, f_real_name, f_sex, f_passwd from t_user where f_name = #{name} and f_passwd = #{passwd}
+  </select>
+</mapper>

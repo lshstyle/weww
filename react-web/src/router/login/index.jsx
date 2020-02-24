@@ -7,6 +7,7 @@ import './index.less'
 import { reqLogin } from '../../api/index'
 import memoryUtil from '../../utils/memoryUtil'
 import storageUtil from '../../utils/storageUtil'
+import httpStatus from '../../utils/httpStatus'
 
 
 const Item = Form.Item
@@ -19,13 +20,12 @@ class Login extends React.Component {
         this.props.form.validateFields(async (err,values) => {
             if (!err) {
                 const {userName, password} = values
-                // const response = await reqLogin(userName, password)
-                // const user = response.data
-                 const user = {status:0, userName:'admin'}
-                if (user.status === 0) {
+                const response = await reqLogin(userName, password)
+                const result = response.data
+                if (result.code === httpStatus.SEARCH) {
                     message.success('登陆成功')
-                    storageUtil.saveUser(user)
-                    memoryUtil.user = user
+                    storageUtil.saveUser(result.data)
+                    memoryUtil.user = result.data
                     this.props.history.replace('/')
                     
                 }

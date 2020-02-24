@@ -1,8 +1,8 @@
 package com.example.react.service;
 
-import java.util.Map;
+import com.example.react.entity.User;
 
 public interface LoginService {
 
-	Map<String, Object> getUserInfo(String userName, String passwd);
+	User getUserInfo(String userName, String passwd);
 }

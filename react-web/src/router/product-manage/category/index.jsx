@@ -6,6 +6,7 @@ import  LinkButton from '../../../components/link-button'
 import {reqCategorys,reqCategoryUpdate,reqCategoryAdd} from '../../../api'
 import AddForm from './add-form'
 import UpdateForm from './update-form'
+import httpStatus from '../../../utils/httpStatus'
 
 export default class Category extends React.Component {
 
@@ -30,94 +31,9 @@ export default class Category extends React.Component {
     getCategorys = async (parentId) => {
         this.setState({loading:true})
         parentId = parentId || this.state.parentId 
-       //const result = await reqCategorys(parentId)
-        let result = []
-       if (parentId === '0') {
-        result = {
-            status: 0,
-            data: [{
-                        name:'手机',
-                        status:'启用',
-                        id: '1'
-                    },
-                    {
-                        name:'电脑', 
-                        status:'停用',
-                        id: '2'
-                    },
-                    {
-                        name:'图书', 
-                        status:'停用',
-                        id: '3'
-                    },
-                    {
-                        name:'食品', 
-                        status:'停用',
-                        id: '4'
-                    },
-                    {
-                        name:'服装', 
-                        status:'停用',
-                        id: '5'
-                    },
-                    {
-                        name:'玩具', 
-                        status:'停用',
-                        id: '6'
-                    },
-                    {
-                        name:'箱包', 
-                        status:'停用',
-                        id: '7'
-                    },
-                    {
-                        name:'居家', 
-                        status:'停用',
-                        id: '8'
-                    },
-                    {
-                        name:'房产', 
-                        status:'停用',
-                        id: '9'
-                    },
-                    {
-                        name:'母婴', 
-                        status:'停用',
-                        id: '10'
-                    },
-                    {
-                        name:'电器', 
-                        status:'停用',
-                        id: '11'
-                    }]
-            }
-       } else {
-        result = {
-            status: 0,
-            data: [{
-                        name:'电视机',
-                        status:'启用',
-                        id: '1'
-                    },
-                    {
-                        name:'电冰箱', 
-                        status:'停用',
-                        id: '2'
-                    },
-                    {
-                        name:'洗衣机', 
-                        status:'停用',
-                        id: '3'
-                    },
-                    {
-                        name:'空调', 
-                        status:'停用',
-                        id: '4'
-                    }]
-            }
-       }
-       
-       if (result.status === 0) {
+       const response = await reqCategorys(parentId)
+       const result = response.data
+       if (result.code === httpStatus.SEARCH) {
            const categorys = result.data
            
            if (parentId === '0') {
@@ -200,9 +116,9 @@ export default class Category extends React.Component {
                 //2.发请求
                 const {parentId,categoryName} = values
                 this.form.resetFields()
-                //const  resut = await reqCategoryaAdd(categoryName,parentId)
-                const result = {status:0}
-                if (result.status === 0) {
+                const  response = await reqCategoryAdd(categoryName,parentId)
+                const result = response.data
+                if (result.code === httpStatus.ADD) {
                     if (parentId === this.state.parentId) {
                         this.getCategorys()
                     } else if (parentId === '0') {
@@ -227,10 +143,9 @@ export default class Category extends React.Component {
                 const categoryId = this.category.id
                 const {categoryName} = values
                 this.form.resetFields()
-                //const  resut = await reqCategoryUpdate({categoryId, categoryName})
-                const result = {status:0}
-                if (result.status === 0) {
-                    
+                const  response = await reqCategoryUpdate({categoryId, categoryName})
+                const result = response.data
+                if (result.code === httpStatus.UPDATE) {
                     this.getCategorys()
                 } 
             }

@@ -7,7 +7,6 @@ import {formatDate} from '../../utils/dateUtil'
 import memoryUtil from '../../utils/memoryUtil'
 import storageUtil from '../../utils/storageUtil'
 import {reqWeather} from '../../api'
-import menuList from '../../config/menu'
 import LinkButton from '../link-button'
 
 class Header extends React.Component {
@@ -38,6 +37,7 @@ class Header extends React.Component {
 
     getTitle = () => {
         const path = this.props.location.pathname
+        const menuList = memoryUtil.menus
         let title 
         menuList.forEach(item => {
             if (item.key === path) {
@@ -57,7 +57,9 @@ class Header extends React.Component {
             content: '确定退出吗？',
             onOk: () => {
               memoryUtil.user = {}
+              memoryUtil.menus = []
               storageUtil.removeUser()
+              storageUtil.removeMenus()
               this.props.history.replace('/login')
             },
           })
@@ -69,7 +71,7 @@ class Header extends React.Component {
 
     render() {
         const {currTime, dayPictureUrl, weather} = this.state
-        const userName = memoryUtil.user.userName
+        const userName = memoryUtil.user.name
         const title = this.getTitle()
         return (
             <div className='header'>

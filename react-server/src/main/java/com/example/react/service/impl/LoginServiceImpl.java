@@ -1,24 +1,23 @@
 package com.example.react.service.impl;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.react.entity.User;
+import com.example.react.mapper.UserMapper;
 import com.example.react.service.LoginService;
 
 @Service
 public class LoginServiceImpl implements LoginService {
 
+	@Autowired
+	private UserMapper userMapper;
+	
+	
 	@Override
-	public Map<String, Object> getUserInfo(String userName, String passwd) {
+	public User getUserInfo(String userName, String passwd) {
 		// TODO Auto-generated method stub
-		
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		resultMap.put("userName", userName);
-	    resultMap.put("password", passwd);
-	    resultMap.put("status", 0);
-		return resultMap;
+		return userMapper.getUserInfo(userName, passwd);
 	}
 
 }
