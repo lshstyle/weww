@@ -13,5 +13,7 @@ public interface CategoryService {
 	void update(String categoryId, String categoryName);
 	
 	void delete(String categoryId);
+	
+	Category detail(String categoryId);
 
 }

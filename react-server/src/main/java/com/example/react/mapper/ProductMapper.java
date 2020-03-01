@@ -11,4 +11,8 @@ import com.example.react.entity.Product;
 public interface ProductMapper {
 
 	List<Product> list(@Param("product") Product product);
+	
+	
+	void updateStatus(@Param("id") String productId,
+			          @Param("status") String status);
 }

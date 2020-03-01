@@ -28,7 +28,7 @@ class LeftNav extends React.Component {
                 )
                 
             } else {
-                const cItem = menu.child.find(item => item.path === path)
+                const cItem = menu.child.find(item => path.indexOf(item.path) === 0)
                 if (cItem) {
                     this.openKey = menu.path
                 }
@@ -58,7 +58,10 @@ class LeftNav extends React.Component {
     }
 
     render() {
-        const path = this.props.location.pathname
+        let path = this.props.location.pathname
+        if (path.indexOf('/product-manage/product') === 0) {
+            path = '/product-manage/product'
+        }
         const openKey = this.openKey
         return (
             <div className='left-nav'>

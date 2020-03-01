@@ -15,7 +15,11 @@ export const reqCategoryUpdate = ({categoryName, categoryId}) => ajax('/category
 
 export const reqCategoryDelete = (categoryId) => ajax('/category/delete', {id:categoryId})
 
+export const reqCategoryDetail = (categoryId) => ajax('/category/detail', {id:categoryId})
+
 export const reqProducts = (pageNum, pageSize, searchType, searchName) => ajax('/product/list', {pageNum, pageSize, [searchType]:searchName},'POST')
+
+export const reqProductUpdateStatus = (productId, status) => ajax('/product/updateStatus', {productId, status})
 
 export const reqWeather = (city) => {
     return new Promise((resolve, reject) => {

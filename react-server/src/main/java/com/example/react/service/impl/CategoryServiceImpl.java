@@ -30,4 +30,8 @@ public class CategoryServiceImpl  implements CategoryService{
 	public void delete (String categoryId) {
 		categoryMapper.delete(categoryId);
 	}
+	
+	public Category detail(String categoryId) {
+		return categoryMapper.detail(categoryId);
+	}
 }

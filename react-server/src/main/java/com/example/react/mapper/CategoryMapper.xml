@@ -25,4 +25,8 @@
   <delete id="delete">
   	delete  from t_category where f_id = #{categoryId}
   </delete>
+  
+  <select id="detail" resultMap="BaseResultMap">
+  	select f_id,f_name,f_parent_id from t_category where f_id = #{categoryId}
+  </select>
 </mapper>

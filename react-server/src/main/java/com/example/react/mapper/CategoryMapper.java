@@ -20,4 +20,6 @@ public interface CategoryMapper {
 			    @Param("categoryName") String categoryName);
 	
 	void delete(@Param("categoryId") String categoryId);
+	
+	Category detail(@Param("categoryId") String categoryId);
 }

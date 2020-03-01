@@ -1,9 +1,9 @@
 import React from 'react'
-import {Card, Select, Input, Button,Icon, Table} from 'antd'
+import {Card, Select, Input, Button,Icon, Table,message} from 'antd'
 
 import LinkButton from '../../../components/link-button'
 import httpStatus from '../../../utils/httpStatus'
-import {reqProducts} from '../../../api'
+import {reqProducts,reqProductUpdateStatus} from '../../../api'
 
 export default class ProductHome extends React.Component {
     state = {
@@ -33,12 +33,16 @@ export default class ProductHome extends React.Component {
             },
             {
                 title: '状态',
-                dataIndex: 'status',
-                render: (status) => {
+                render: (product) => {
+                    const {status, id} = product
                     return (
                         <span>
-                            <Button type='primary' >下架</Button>
-                            <span>在售</span>
+                            <Button type='primary' 
+                                    onClick ={ () => this.updateStatus(id, status === '1'? '2' : '1')}
+                            >
+                                {status === '1' ? '下架' : '上架'}
+                            </Button>
+                            <span>{status === '1' ? '在售' : '已下架'}</span>
                         </span>
                     )
                 }
@@ -49,13 +53,22 @@ export default class ProductHome extends React.Component {
                 render: (product) => {
                     return (
                         <span>
-                           <LinkButton>详情</LinkButton>
-                           <LinkButton>修改</LinkButton>
+                           <LinkButton onClick={ ()=> this.props.history.push('/product-manage/product/detail',{product})}>详情</LinkButton>
+                           <LinkButton onClick={ ()=> this.props.history.push('/product-manage/product/addUpdate', {product})}>修改</LinkButton>
                         </span>
                     )
                 }
               }
           ]
+    }
+
+    updateStatus = async (productId, status) => {
+       
+        const result = await reqProductUpdateStatus(productId, status)
+        if (result.code === httpStatus.UPDATE) {
+            message.info("操作成功")
+            this.getProducts(1)
+        }
     }
 
     getProducts = async (pageNum) => {
@@ -93,8 +106,8 @@ export default class ProductHome extends React.Component {
             </span>
             )
         const extra = (
-            <Button type='primary'>
-                <Icon type='plus' />
+            <Button type='primary' onClick= { () => this.props.history.push('/product-manage/product/addUpdate')} >
+            <Icon type='plus' />
                 添加商品
             </Button>
         )

@@ -7,12 +7,15 @@
     <result column="f_name" jdbcType="VARCHAR" property="name" />
     <result column="f_desc" jdbcType="VARCHAR" property="desc" />
     <result column="f_price" jdbcType="DECIMAL" property="price" />
-    <result column="f_img" jdbcType="DECIMAL" property="img" />
+    <result column="f_imgs" jdbcType="DECIMAL" property="imgs" />
     <result column="f_status" jdbcType="VARCHAR" property="status" />
+    <result column="f_detail" jdbcType="VARCHAR" property="detail" />
+    <result column="f_category" jdbcType="VARCHAR" property="category" />
+    <result column="f_parent_category" jdbcType="VARCHAR" property="parentCategory" />
   </resultMap>
   
   <select id="list" resultMap="BaseResultMap">
-    select f_id, f_name, f_desc,f_img, f_price, f_status 
+    select f_id, f_name, f_desc,f_imgs, f_price, f_status ,f_detail,f_category, f_parent_category
     from t_product
     where 1=1
     <if test="product.desc != null and product.desc != ''">
@@ -22,4 +25,8 @@
     	and f_name like CONCAT ('%', #{product.name}, '%')
     </if>
   </select>
+  
+  <update id="updateStatus" >
+  	update t_product set f_status = #{status} where f_id=#{id}
+  </update>
 </mapper>

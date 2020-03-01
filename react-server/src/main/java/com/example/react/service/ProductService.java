@@ -7,4 +7,6 @@ public interface ProductService {
 
 	PageInfo<Product> list(Product product);
 	
+	void updateStatus(String productId, String status);
+	
 }

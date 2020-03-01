@@ -23,6 +23,10 @@ public class ProductServiceImpl implements ProductService{
 		List<Product> list =  productMapper.list(product);
 		return new PageInfo<Product>(list);
 	}
+	
+	public void updateStatus(String productId, String status) {
+		productMapper.updateStatus(productId, status);
+	}
 
 	
 }

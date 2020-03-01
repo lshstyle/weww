@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.react.mapper.UploadMapper">
+  <resultMap id="BaseResultMap" type="com.example.react.entity.Upload">
+   
+    <id column="f_id" jdbcType="VARCHAR" property="id" />
+    <result column="f_name" jdbcType="VARCHAR" property="name" />
+    <result column="f_file_name" jdbcType="VARCHAR" property="fileName" />
+    <result column="f_size" jdbcType="BIGINT" property="size" />
+    <result column="f_path" jdbcType="VARCHAR" property="path" />
+    <result column="f_type" jdbcType="VARCHAR" property="type" />
+  </resultMap>
+  
+  <select id="list" resultMap="BaseResultMap">
+    select f_id,f_name,f_file_name, f_size, f_path,f_type 
+    from t_upload 
+  </select>
+  
+  <insert id="add">
+  	insert into t_upload (f_id, f_file_name, f_name, f_size, f_path,f_type )
+  	values (#{upload.id}, #{upload.fileName}, #{upload.name}, #{upload.size}, #{upload.path}, #{upload.type})
+  </insert>
+  
+  <delete id="delete">
+  	delete  from t_upload where f_id = #{uploadId}
+  </delete>
+  
+  <select id="detail" resultMap="BaseResultMap">
+  	select f_id, f_file_name, f_name, f_size, f_path,f_type 
+    from t_upload where f_id = #{uploadId}
+  </select>
+</mapper>

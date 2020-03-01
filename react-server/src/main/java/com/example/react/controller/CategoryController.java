@@ -48,4 +48,10 @@ public class CategoryController {
 		categoryService.delete(categoryId);
 		return new Result(HttpStatus.DELETE);
 	}
+	
+	@GetMapping("/detail")
+	public Result<Category> getCategoryById(@RequestParam("id") String categoryId) {
+		Category category = categoryService.detail(categoryId);
+		return new Result<Category>(category, HttpStatus.SEARCH);
+	}
 }
