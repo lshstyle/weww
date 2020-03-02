@@ -19,6 +19,8 @@ export const reqCategoryDetail = (categoryId) => ajax('/category/detail', {id:ca
 
 export const reqProducts = (pageNum, pageSize, searchType, searchName) => ajax('/product/list', {pageNum, pageSize, [searchType]:searchName},'POST')
 
+export const reqProductUpdateOrAdd = (product) => ajax('/product/update', product, 'POST')
+
 export const reqProductUpdateStatus = (productId, status) => ajax('/product/updateStatus', {productId, status})
 
 export const reqUploadDelete = (uploadName) => ajax('/upload/delete', {uploadName})

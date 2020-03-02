@@ -31,8 +31,14 @@
   </update>
   
   <update id="update">
-  		update t_product set f_name = #{product.name} ,f_desc=#{product.desc}, f_price=#{product.price},
-  		f_detail = #{product.detail}, f_category=#{product.category}, f_parent_category=#{parentCategory}
+  		update t_product set f_name = #{product.name} ,f_desc=#{product.desc}, f_price=#{product.price},f_imgs=#{product.imgs},
+  		f_detail = #{product.detail}, f_category=#{product.category}, f_parent_category=#{product.parentCategory}
   		where f_id =#{product.id}
+  </update>
+  
+  <update id="add">
+  		insert into t_product (f_id,f_name,f_desc,f_price,f_imgs,f_detail,f_category,f_parent_category,f_status)
+  		values(replace(uuid(), '-', ''),#{product.name} ,#{product.desc}, #{product.price},#{product.imgs},
+  		#{product.detail}, #{product.category}, #{product.parentCategory}, '1')
   </update>
 </mapper>

@@ -28,7 +28,12 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	public void update(Product product) {
-		productMapper.update(product);
+		if (product != null && product.getId() != null) {
+			productMapper.update(product);
+		} else {
+			productMapper.add(product);
+		}
+		
 	}
 	
 }

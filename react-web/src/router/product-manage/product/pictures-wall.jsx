@@ -74,9 +74,7 @@ export default class PicturesWall extends React.Component{
     }
 
     getImgs = () => {
-        const imgs = []
-        this.state.fileList.map(file => imgs.push(file.name))
-        return imgs.join()
+        return this.state.fileList.map(file =>file.name).join()
     }
 
     render() {

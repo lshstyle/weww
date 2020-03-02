@@ -1,8 +1,8 @@
 import React from 'react'
-import {Card,Icon, Form, Input, Cascader, Button} from 'antd'
+import {Card,Icon, Form, Input, Cascader, Button, message} from 'antd'
 
 import LinkButton  from '../../../components/link-button'
-import {reqCategorys} from '../../../api'
+import {reqCategorys, reqProductUpdateOrAdd} from '../../../api'
 import httpStatus from '../../../utils/httpStatus'
 import PicturesWall from './pictures-wall'
 import RichTextEditor from './rich-text-editor'
@@ -13,7 +13,7 @@ const TextArea = Input.TextArea
 class ProudctAddUpdate extends React.Component {
 
     state = {
-        options: [],
+        options: []
     }
 
     constructor(props) {
@@ -25,14 +25,30 @@ class ProudctAddUpdate extends React.Component {
 
 
     submit = () => {
-        this.props.form.validateFields((error, values)=>{
+        this.props.form.validateFields(async (error, values)=>{
             if (!error) {
-               
                 const imgs = this.uploadImg.current.getImgs()
                 const detail = this.textEditor.current.getDetail()
-                console.log('values:' , values)
-                console.log('imgs',imgs)
-                console.log('detail',detail)
+                const {name, desc,price,categorys} = values
+                let parentCategory, category
+                if (categorys.length>1) {
+                    parentCategory = categorys[0]
+                    category = categorys[1]
+                } else {
+                    parentCategory='0'
+                    category=categorys[0]
+                }
+                const product = {name,price,desc,imgs,detail,category,parentCategory}
+                if (this.isUpdate) {
+                    product.id = this.product.id
+                }
+                const result = await reqProductUpdateOrAdd(product)
+                if (result.code === httpStatus.UPDATE) {
+                    message.success(`${this.isUpdate? '更新' : '添加' }'商品成功'`)
+                    this.props.history.goBack()
+                } else {
+                    message.error(`${this.isUpdate? '更新' : '添加' }'商品失败'`)
+                }
             }
         })
     }
@@ -193,7 +209,7 @@ class ProudctAddUpdate extends React.Component {
                     </Item>
                     <Item label='商品分类'>
                         {
-                            getFieldDecorator('category', {
+                            getFieldDecorator('categorys', {
                                 initialValue: categorys,
                                 rules: [
                                     {

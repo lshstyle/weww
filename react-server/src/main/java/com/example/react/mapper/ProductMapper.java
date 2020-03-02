@@ -17,4 +17,6 @@ public interface ProductMapper {
 			          @Param("status") String status);
 	
 	void update(@Param("product") Product product);
+	
+	void add(@Param("product") Product product);
 }
