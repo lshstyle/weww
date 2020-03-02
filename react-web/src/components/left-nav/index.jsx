@@ -1,10 +1,9 @@
 import React from 'react'
-import {Menu, Icon, message} from 'antd'
+import {Menu, Icon} from 'antd'
 import {Link, withRouter} from 'react-router-dom'
 
 import './index.less'
 import logo from '../../assets/images/favicon.ico'
-import {reqMenu} from '../../api'
 import memoryUtil from '../../utils/memoryUtil'
 
 const {SubMenu} = Menu

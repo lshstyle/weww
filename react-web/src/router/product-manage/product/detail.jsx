@@ -1,7 +1,6 @@
 import React from 'react'
 import {Card, Icon, List,} from 'antd'
 
-import LinkButton from '../../../components/link-button'
 import {reqCategoryDetail} from '../../../api' 
 
 const Item = List.Item

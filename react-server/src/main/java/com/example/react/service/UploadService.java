@@ -10,4 +10,6 @@ public interface UploadService {
 	
 	String read(String uploadId);
 	
+	void delete(String uploadName);
+	
 }

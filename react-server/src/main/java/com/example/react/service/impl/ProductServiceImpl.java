@@ -17,7 +17,6 @@ public class ProductServiceImpl implements ProductService{
 	@Autowired
 	private ProductMapper productMapper;
 	
-	@Override
 	public PageInfo<Product> list(Product product) {
 		PageHelper.startPage(product.getPageNum(), product.getPageSize());
 		List<Product> list =  productMapper.list(product);
@@ -28,5 +27,8 @@ public class ProductServiceImpl implements ProductService{
 		productMapper.updateStatus(productId, status);
 	}
 
+	public void update(Product product) {
+		productMapper.update(product);
+	}
 	
 }

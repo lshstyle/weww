@@ -34,5 +34,11 @@ public class UploadController {
 		String result = uploadService.read(uploadId);
 		return new Result<String>(result, HttpStatus.SEARCH);
 	}
+	
+	@GetMapping("delete")
+	public Result delete(@RequestParam("uploadName") String uploadName) {
+		uploadService.delete(uploadName);
+		return new Result(HttpStatus.DELETE);
+	}
 
 }

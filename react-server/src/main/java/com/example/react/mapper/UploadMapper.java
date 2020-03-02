@@ -11,4 +11,6 @@ public interface UploadMapper {
 	void add(@Param("upload") Upload upload);
 
 	Upload detail(@Param("uploadId") String uploadId);
+	
+	Integer delete(@Param("uploadName") String uploadName);
 }

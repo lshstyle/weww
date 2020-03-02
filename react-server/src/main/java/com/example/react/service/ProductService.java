@@ -9,4 +9,5 @@ public interface ProductService {
 	
 	void updateStatus(String productId, String status);
 	
+	void update(Product product);
 }

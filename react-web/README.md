@@ -45,3 +45,7 @@ yarn add store
 16.安装jsonp
 yarn add jsonp
 
+17.富文本框
+yarn add react-draft-wysiwyg draftjs-to-html
+
+

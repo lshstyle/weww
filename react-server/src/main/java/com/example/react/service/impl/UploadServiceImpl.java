@@ -91,4 +91,10 @@ public class UploadServiceImpl  implements UploadService {
 		}
 		return result;
 	}
+	
+	public void delete(String uploadName) {
+		File deleteFile = new File(path + File.separator + uploadName);
+		deleteFile.delete();
+		uploadMapper.delete(uploadName);
+	}
 }

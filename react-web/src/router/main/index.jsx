@@ -50,7 +50,7 @@ export default class App extends React.Component {
             )
         }
         return (
-            <Layout style={{width:'100%', height:'100%'}}>
+            <Layout style={{width:'100%', minHeight:'100%'}}>
                 <Sider>
                     <LeftNav/>
                 </Sider>

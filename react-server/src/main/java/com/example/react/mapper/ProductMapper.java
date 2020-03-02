@@ -15,4 +15,6 @@ public interface ProductMapper {
 	
 	void updateStatus(@Param("id") String productId,
 			          @Param("status") String status);
+	
+	void update(@Param("product") Product product);
 }

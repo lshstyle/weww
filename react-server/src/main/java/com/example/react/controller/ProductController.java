@@ -35,4 +35,10 @@ public class ProductController {
 		productService.updateStatus(productId, status);
 		return new Result(HttpStatus.UPDATE);
 	}
+	
+	@PostMapping("/update")
+	public Result update(@RequestBody Product product) {
+		productService.update(product);
+		return new Result(HttpStatus.UPDATE);
+	}
 }

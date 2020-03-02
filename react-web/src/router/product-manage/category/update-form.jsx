@@ -1,9 +1,8 @@
 import React from 'react'
-import {Form, Select,Input} from 'antd'
+import {Form,Input} from 'antd'
 import PropTypes from 'prop-types'
 
 const Item = Form.Item
-const Option = Select.Option
 class UpdateForm extends React.Component {
     static propTypes = {
         categoryName: PropTypes.string.isRequired,

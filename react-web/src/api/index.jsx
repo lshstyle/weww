@@ -21,6 +21,8 @@ export const reqProducts = (pageNum, pageSize, searchType, searchName) => ajax('
 
 export const reqProductUpdateStatus = (productId, status) => ajax('/product/updateStatus', {productId, status})
 
+export const reqUploadDelete = (uploadName) => ajax('/upload/delete', {uploadName})
+
 export const reqWeather = (city) => {
     return new Promise((resolve, reject) => {
         const url = `http://api.map.baidu.com/telematics/v3/weather?location=${city}&output=json&ak=a4uGsIZfMvmah5LjZmiydyIm9du38Mdx`

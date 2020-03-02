@@ -1,15 +1,14 @@
 import React from 'react'
-import {Card,Icon, Form, Input, Cascader, Upload, Button} from 'antd'
+import {Card,Icon, Form, Input, Cascader, Button} from 'antd'
 
 import LinkButton  from '../../../components/link-button'
 import {reqCategorys} from '../../../api'
 import httpStatus from '../../../utils/httpStatus'
 import PicturesWall from './pictures-wall'
+import RichTextEditor from './rich-text-editor'
 
 const Item = Form.Item
 const TextArea = Input.TextArea
-
-
 
 class ProudctAddUpdate extends React.Component {
 
@@ -17,11 +16,23 @@ class ProudctAddUpdate extends React.Component {
         options: [],
     }
 
+    constructor(props) {
+        super(props)
+        this.uploadImg = React.createRef()
+        this.textEditor = React.createRef()
+    }
+
+
 
     submit = () => {
         this.props.form.validateFields((error, values)=>{
             if (!error) {
-
+               
+                const imgs = this.uploadImg.current.getImgs()
+                const detail = this.textEditor.current.getDetail()
+                console.log('values:' , values)
+                console.log('imgs',imgs)
+                console.log('detail',detail)
             }
         })
     }
@@ -101,8 +112,10 @@ class ProudctAddUpdate extends React.Component {
     render() {
         const {isUpdate, product} = this
         const categorys = []
+        const {parentCategory, imgs,category, detail} = product
+      
         if (isUpdate) {
-            const {parentCategory, category} = product
+            
             if (parentCategory === '0') {
                 categorys.push(category)
             } else {
@@ -198,22 +211,10 @@ class ProudctAddUpdate extends React.Component {
                         
                     </Item>
                     <Item label='商品图片'>
-                        {
-                            getFieldDecorator('imgs', {
-                                initialValue: product.price,
-                                rules: [
-                                    {
-                                        required: false
-                                    }
-                                ]
-                            })(
-                                <PicturesWall />
-                            )
-                        }
-                        
+                        <PicturesWall  ref= {this.uploadImg} imgs={imgs}/>
                     </Item>
-                    <Item label='商品详情'>
-                        <Input placeholder='请输入商品详情' />
+                    <Item label='商品详情'  labelCol={{span:2}} wrapperCol={{span: 20}} >
+                        <RichTextEditor ref={this.textEditor} detail={detail}/>
                     </Item>
                     <Item>
                         <Button type='primary' onClick={this.submit}>提交</Button>
@@ -225,3 +226,5 @@ class ProudctAddUpdate extends React.Component {
 }
 
 export default  Form.create()(ProudctAddUpdate)
+
+/*子组件调用父组件的方法：将父组件的方法以函数属性的形式传递给子组件，子组件就可以调用*/

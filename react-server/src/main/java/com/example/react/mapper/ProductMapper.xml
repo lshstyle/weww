@@ -29,4 +29,10 @@
   <update id="updateStatus" >
   	update t_product set f_status = #{status} where f_id=#{id}
   </update>
+  
+  <update id="update">
+  		update t_product set f_name = #{product.name} ,f_desc=#{product.desc}, f_price=#{product.price},
+  		f_detail = #{product.detail}, f_category=#{product.category}, f_parent_category=#{parentCategory}
+  		where f_id =#{product.id}
+  </update>
 </mapper>

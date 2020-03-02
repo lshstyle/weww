@@ -22,7 +22,7 @@
   </insert>
   
   <delete id="delete">
-  	delete  from t_upload where f_id = #{uploadId}
+  	delete  from t_upload where f_name = #{uploadName}
   </delete>
   
   <select id="detail" resultMap="BaseResultMap">
