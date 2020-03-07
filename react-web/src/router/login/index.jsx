@@ -4,7 +4,7 @@ import {Form, Icon, Input, Button, message} from 'antd'
 
 import './index.less'
 
-import { reqLogin } from '../../api/index'
+import { reqLogin ,reqMenu} from '../../api/index'
 import memoryUtil from '../../utils/memoryUtil'
 import storageUtil from '../../utils/storageUtil'
 import httpStatus from '../../utils/httpStatus'
@@ -25,8 +25,17 @@ class Login extends React.Component {
                     message.success('登陆成功')
                     storageUtil.saveUser(result.data)
                     memoryUtil.user = result.data
+
+                    /*请求菜单 */
+                    const menuResult = await reqMenu()
+                    if (menuResult.code === httpStatus.SEARCH) {
+                        storageUtil.saveMenus(menuResult.data)
+                        memoryUtil.menus = menuResult.data
+                    } else {
+                        message.error('获取菜单失败')
+                    }
+
                     this.props.history.replace('/')
-                    
                 }
             } else {
                 message.error('登陆成功')

@@ -21,9 +21,27 @@ export const reqProducts = (pageNum, pageSize, searchType, searchName) => ajax('
 
 export const reqProductUpdateOrAdd = (product) => ajax('/product/update', product, 'POST')
 
+export const reqProductDelete = (productId) => ajax('/product/delete', {productId})
+
 export const reqProductUpdateStatus = (productId, status) => ajax('/product/updateStatus', {productId, status})
 
 export const reqUploadDelete = (uploadName) => ajax('/upload/delete', {uploadName})
+
+export const reqRoles = (pageNum, pageSize) => ajax('/role/list', {pageNum, pageSize}, 'POST')
+
+export const reqRolesAll = () => ajax('/role/listAll', {})
+
+export const reqAddRole = (name) => ajax('/role/add', {name})
+
+export const reqUpdateRoleAuth = (role) => ajax('/role/updateAuth', role, 'POST')
+
+export const reqUpdateRole = (id, name) => ajax('/role/update', {id, name})
+
+export const reqUsers = (pageNum, pageSize) => ajax('/user/list', {pageNum, pageSize}, 'POST')
+
+export const reqDeleteUser = (id) => ajax('/user/delete', {userId:id})
+
+export const reqAddOrUpdateUser = (user) => ajax('/user/update', user, 'POST')
 
 export const reqWeather = (city) => {
     return new Promise((resolve, reject) => {

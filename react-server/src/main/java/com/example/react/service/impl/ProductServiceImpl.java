@@ -33,7 +33,10 @@ public class ProductServiceImpl implements ProductService{
 		} else {
 			productMapper.add(product);
 		}
-		
+	}
+	
+	public void delete(String productId) {
+		productMapper.delete(productId);
 	}
 	
 }

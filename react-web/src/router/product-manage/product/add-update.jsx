@@ -22,8 +22,6 @@ class ProudctAddUpdate extends React.Component {
         this.textEditor = React.createRef()
     }
 
-
-
     submit = () => {
         this.props.form.validateFields(async (error, values)=>{
             if (!error) {
@@ -63,6 +61,7 @@ class ProudctAddUpdate extends React.Component {
     }
     
     getCategorys = async (parentId)  => {
+        
         const result = await reqCategorys(parentId)
         if (result.code === httpStatus.SEARCH) {
             const categorys = result.data
@@ -120,7 +119,7 @@ class ProudctAddUpdate extends React.Component {
     }
 
     componentWillMount() {
-        const product = this.props.location.state.product
+        const {product} = this.props.location.state
         this.isUpdate = !!product
         this.product = product || {}
     }

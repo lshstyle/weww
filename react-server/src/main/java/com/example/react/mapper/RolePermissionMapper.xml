@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.react.mapper.RolePermissionMapper">
+  <resultMap id="BaseResultMap" type="com.example.react.entity.RolePermission">
+   
+    <id column="f_id" jdbcType="VARCHAR" property="id" />
+    <result column="f_role_id" jdbcType="VARCHAR" property="roleId" />
+    <result column="f_menu_id" jdbcType="VARCHAR" property="menuId" />
+  </resultMap>
+  
+  <select id="list" resultMap="BaseResultMap">
+    select f_id, f_role_id, f_menu_id  from t_role_permission where f_role_id = #{roleId}
+  </select>
+  
+  <select id="getMenusByRoleId" resultType="java.lang.String">
+    select f_menu_id  from t_role_permission where f_role_id = #{roleId}
+  </select>
+  
+  <insert id="add">
+  	insert into t_role_permission (f_id, f_role_id,f_menu_id)
+  	values (replace(uuid(), '-', ''), #{roleId}, #{menuId})
+  </insert>
+  
+  <delete id="deleteByRoleId">
+  	delete from t_role_permission where f_role_id =#{roleId}
+  </delete>
+</mapper>

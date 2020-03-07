@@ -8,9 +8,33 @@
     <result column="f_real_name" jdbcType="VARCHAR" property="realName" />
     <result column="f_sex" jdbcType="VARCHAR" property="sex" />
     <result column="f_passwd" jdbcType="INTEGER" property="passwd" />
+    <result column="f_email" jdbcType="VARCHAR" property="email" />
+    <result column="f_phone" jdbcType="VARCHAR" property="phone" />
+    <result column="f_create_time" jdbcType="VARCHAR" property="createTime" />
+    <collection property="roles" column="f_id" select="com.example.react.mapper.RoleMapper.getUserRoles"/>
   </resultMap>
   
   <select id="getUserInfo" resultMap="BaseResultMap">
-    select f_id, f_name, f_real_name, f_sex, f_passwd from t_user where f_name = #{name} and f_passwd = #{passwd}
+    select f_id, f_name, f_real_name, f_sex, f_passwd, f_email,f_phone
+    from t_user where f_name = #{name} and f_passwd = #{passwd}
   </select>
+  
+  <select id="list" resultMap="BaseResultMap">
+  	select f_id, f_name, f_real_name, f_sex, f_create_time, f_email,f_phone
+    from t_user
+  </select>
+  
+  <insert id="add">
+  	insert into t_user (f_id, f_name,f_real_name, f_sex, f_passwd,f_email,f_phone,f_create_time)
+  	values(replace(uuid(), '-', ''), #{user.name}, #{user.realName}, #{user.sex}, #{user.name}, #{user.email}, #{user.phone},now())
+  </insert>
+  
+  <update id="update">
+  	update t_user set f_real_name=#{user.realName}, f_name=#{user.name}, f_sex=#{user.sex}, f_passwd=#{user.name},
+  	f_email=#{user.email}, f_phone=#{user.phone} where f_id=#{user.id}
+  </update>
+  
+  <delete id="delete">
+  	delete from t_user where f_id = #{userId}
+  </delete>
 </mapper>

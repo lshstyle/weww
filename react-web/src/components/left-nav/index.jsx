@@ -51,7 +51,6 @@ class LeftNav extends React.Component {
     }
 
     componentWillMount() {
-        
         const menus = memoryUtil.menus
         this.menuNodes = this.showMenuNodes(menus)
     }

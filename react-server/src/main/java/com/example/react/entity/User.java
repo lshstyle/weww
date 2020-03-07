@@ -1,12 +1,31 @@
 package com.example.react.entity;
 
-public class User {
+import java.util.List;
+
+public class User extends Page{
 
 	private String id;
 	private String name;
 	private String passwd;
 	private String sex;
 	private String realName;
+	private String phone;
+	private String email;
+	private List<Role> roles;
+	private String createTime;
+	
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getId() {
 		return id;
 	}
@@ -36,6 +55,18 @@ public class User {
 	}
 	public void setRealName(String realName) {
 		this.realName = realName;
+	}
+	public List<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+	public String getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
 	}
 	
 }

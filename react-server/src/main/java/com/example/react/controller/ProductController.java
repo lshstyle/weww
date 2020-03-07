@@ -41,4 +41,10 @@ public class ProductController {
 		productService.update(product);
 		return new Result(HttpStatus.UPDATE);
 	}
+	
+	@GetMapping("/delete")
+	public Result delete(@RequestParam("productId") String productId) {
+		productService.delete(productId);
+		return new Result(HttpStatus.DELETE);
+	}
 }

@@ -37,10 +37,11 @@ class Header extends React.Component {
 
     getTitle = () => {
         const path = this.props.location.pathname
+        
         const menuList = memoryUtil.menus
-        let title 
+        let title
         menuList.forEach(item => {
-            if (item.key === path) {
+            if (item.path === path) {
                 title = item.title
             } else if (item.child){
                 const menu = item.child.find(cItem => cItem.key === path)
@@ -49,6 +50,7 @@ class Header extends React.Component {
                 }
             }
         })
+        
         return title
     }
 

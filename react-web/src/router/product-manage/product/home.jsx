@@ -3,7 +3,7 @@ import {Card, Select, Input, Button,Icon, Table,message} from 'antd'
 
 import LinkButton from '../../../components/link-button'
 import httpStatus from '../../../utils/httpStatus'
-import {reqProducts,reqProductUpdateStatus} from '../../../api'
+import {reqProducts,reqProductUpdateStatus,reqProductDelete} from '../../../api'
 
 export default class ProductHome extends React.Component {
     state = {
@@ -33,6 +33,7 @@ export default class ProductHome extends React.Component {
             },
             {
                 title: '状态',
+                width: 100,
                 render: (product) => {
                     const {status, id} = product
                     return (
@@ -49,12 +50,13 @@ export default class ProductHome extends React.Component {
               },
               {
                 title: '操作',
-                width: 100,
+                width: 120,
                 render: (product) => {
                     return (
                         <span>
                            <LinkButton onClick={ ()=> this.props.history.push('/product-manage/product/detail',{product})}>详情</LinkButton>
                            <LinkButton onClick={ ()=> this.props.history.push('/product-manage/product/addUpdate', {product})}>修改</LinkButton>
+                           <LinkButton onClick={ ()=> this.productDelete(product)}>删除</LinkButton>
                         </span>
                     )
                 }
@@ -63,9 +65,17 @@ export default class ProductHome extends React.Component {
     }
 
     updateStatus = async (productId, status) => {
-       
         const result = await reqProductUpdateStatus(productId, status)
         if (result.code === httpStatus.UPDATE) {
+            message.info("操作成功")
+            this.getProducts(1)
+        }
+    }
+
+    productDelete = async(product) => {
+        const productId = product.id
+        const result = await reqProductDelete(productId)
+        if (result.code === httpStatus.DELETE) {
             message.info("操作成功")
             this.getProducts(1)
         }

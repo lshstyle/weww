@@ -84,7 +84,7 @@ export default class Category extends React.Component {
     }
 
     showUpdateModal = (category) => {
-        this.category = category 
+        this.category = category
         this.setState({showStatus: 2})
     }
 

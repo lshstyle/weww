@@ -12,9 +12,9 @@
   </resultMap>
   
   <select id="list" resultMap="BaseResultMap">
-    select f_id, f_title, f_path, f_parent_id, f_icon 
+    select f_id, f_title, f_path, f_parent_id, f_icon
     from t_menu 
     where f_is_enable = 1 
-    order by f_id asc, f_index asc
+    order by f_parent_id,f_index,f_id
   </select>
 </mapper>

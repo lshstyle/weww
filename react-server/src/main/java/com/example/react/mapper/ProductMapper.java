@@ -19,4 +19,6 @@ public interface ProductMapper {
 	void update(@Param("product") Product product);
 	
 	void add(@Param("product") Product product);
+	
+	void delete(@Param("productId") String productId);
 }

@@ -1,7 +1,8 @@
 import React from 'react'
 import {Card, Icon, List,} from 'antd'
 
-import {reqCategoryDetail} from '../../../api' 
+import {reqCategoryDetail} from '../../../api'
+import {BASE_IMG_URL} from '../../../utils/constants' 
 
 const Item = List.Item
 export default class ProductDetail extends React.Component {
@@ -65,7 +66,7 @@ export default class ProductDetail extends React.Component {
                             {imgs.split(',').map(img => (
                                 <img
                                     className='product-img'
-                                    src = {require('../../../assets/images/' + img)}
+                                    src = {BASE_IMG_URL + img}
                                     alt='图片' />
                             ))
                         }

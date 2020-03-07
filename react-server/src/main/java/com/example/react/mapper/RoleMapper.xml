@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.react.mapper.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.example.react.entity.Role">
+   
+    <id column="f_id" jdbcType="VARCHAR" property="id" />
+    <result column="f_name" jdbcType="VARCHAR" property="name" />
+    <result column="f_auth_id" jdbcType="VARCHAR" property="authId" />
+    <result column="f_auth_time" jdbcType="VARCHAR" property="authTime" />
+    <result column="f_create_time" jdbcType="INTEGER" property="createTime" />
+    <result column="f_auth_name" jdbcType="VARCHAR" property="authName" />
+    <collection property="menus" column="f_id" select="com.example.react.mapper.RolePermissionMapper.getMenusByRoleId" />
+  </resultMap>
+  
+  <select id="list" resultMap="BaseResultMap">
+  	select r.f_id, r.f_name, r.f_auth_id, u.f_real_name f_auth_name, r.f_auth_time, r.f_create_time from t_role r
+  	left join t_user u
+  	on r.f_auth_id = u.f_id
+  </select>
+  
+  <insert id="add">
+  	insert into t_role (f_id, f_name,f_create_time) values(replace(uuid(), '-', ''), #{name}, now())
+  </insert>
+  
+  <update id="update">
+  	update t_role set f_name= #{name} where f_id = #{id}
+  </update>
+  
+  <update id="updateAuth">
+  	update t_role set f_auth_time = now() ,f_auth_id = #{authId} where f_id =#{id}
+  </update>
+  
+  <select id="getUserRoles" resultMap="BaseResultMap">
+    select r.f_id,r.f_name
+    from t_user_role ur
+    inner join t_role r
+    on ur.f_role_id = r.f_id
+    where f_user_id =#{userId}
+  </select>
+</mapper>

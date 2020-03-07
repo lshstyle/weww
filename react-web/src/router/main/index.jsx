@@ -14,36 +14,18 @@ import Category from '../product-manage/category'
 import Bar from '../analysis/bar'
 import Line from '../analysis/line'
 import Pie from '../analysis/pie'
-import User from '../system/user'
-import Role from '../system/role'
+import User from '../user'
+import Role from '../role'
 import Config from '../system/config'
 import Git from '../devlop/git'
 
 const {Footer, Sider, Content} = Layout
+
+
 export default class App extends React.Component {
     
-    getMenus = async () => {
-        const result = await reqMenu()
-        if (result.code === httpStatus.SEARCH) {
-            storageUtil.saveMenus(result.data)
-            memoryUtil.menus = result.data
-        } else {
-            message.error('获取菜单失败')
-        }
-    }
-
-    componentWillMount() {
-        
-        const menus = memoryUtil.menu
-        if (!menus || menus.length <=0 ) {
-            this.getMenus()
-        }
-    }
-
     render() {
-        
         const user = memoryUtil.user
-        
         if (!user || !user.name) {
             return (
                 <Redirect to='/login' />
@@ -64,8 +46,8 @@ export default class App extends React.Component {
                             <Route path='/analysis/bar' component={Bar} />
                             <Route path='/analysis/line' component={Line} />
                             <Route path='/analysis/pie' component={Pie} />
-                            <Route path='/system/user' component={User} />
-                            <Route path='/system/role' component={Role} />
+                            <Route path='/user' component={User} />
+                            <Route path='/role' component={Role} />
                             <Route path='/system/config' component={Config} />
                             <Route path='/devlop' component={Git} />
                             <Redirect to='/home' />

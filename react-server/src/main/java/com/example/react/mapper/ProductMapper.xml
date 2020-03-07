@@ -41,4 +41,8 @@
   		values(replace(uuid(), '-', ''),#{product.name} ,#{product.desc}, #{product.price},#{product.imgs},
   		#{product.detail}, #{product.category}, #{product.parentCategory}, '1')
   </update>
+  
+  <delete id="delete">
+  	delete from t_product where f_id=#{productId}
+  </delete>
 </mapper>
