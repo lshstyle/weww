@@ -15,6 +15,8 @@ public class Menu {
 	private List<Menu> child;
 	/*parentId*/
 	private String parentId;
+	/*是否公开*/
+	private String isPublic;
 	
 	public String getParentId() {
 		return parentId;
@@ -53,6 +55,10 @@ public class Menu {
 	public void setChild(List<Menu> child) {
 		this.child = child;
 	}
-	
-	
+	public String getIsPublic() {
+		return isPublic;
+	}
+	public void setIsPublic(String isPublic) {
+		this.isPublic = isPublic;
+	}
 }

@@ -30,11 +30,4 @@
   	update t_role set f_auth_time = now() ,f_auth_id = #{authId} where f_id =#{id}
   </update>
   
-  <select id="getUserRoles" resultMap="BaseResultMap">
-    select r.f_id,r.f_name
-    from t_user_role ur
-    inner join t_role r
-    on ur.f_role_id = r.f_id
-    where f_user_id =#{userId}
-  </select>
 </mapper>

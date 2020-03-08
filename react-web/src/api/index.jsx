@@ -5,7 +5,7 @@ import {message} from 'antd'
 
 export const reqLogin = (userName, passwd) => ajax('/login/getUserInfo', {userName, passwd})
 
-export const reqMenu = () => ajax('/menu/list', {})
+export const reqMenu = (userId) => ajax('/menu/list', {userId})
 
 export const reqCategorys = (parentId) => ajax('/category/list', {parentId})
 
@@ -27,9 +27,7 @@ export const reqProductUpdateStatus = (productId, status) => ajax('/product/upda
 
 export const reqUploadDelete = (uploadName) => ajax('/upload/delete', {uploadName})
 
-export const reqRoles = (pageNum, pageSize) => ajax('/role/list', {pageNum, pageSize}, 'POST')
-
-export const reqRolesAll = () => ajax('/role/listAll', {})
+export const reqRoles = () => ajax('/role/list', {}, 'POST')
 
 export const reqAddRole = (name) => ajax('/role/add', {name})
 

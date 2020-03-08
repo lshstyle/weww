@@ -14,8 +14,6 @@ import com.example.react.entity.Role;
 import com.example.react.service.RoleService;
 import com.example.react.util.HttpStatus;
 import com.example.react.util.Result;
-import com.example.react.util.ResultPage;
-import com.github.pagehelper.PageInfo;
 
 @RestController
 @RequestMapping("/role")
@@ -26,9 +24,9 @@ public class RoleController {
 	
 	
 	@PostMapping("/list")
-	public ResultPage<Role> list(@RequestBody Role role) {
-		PageInfo<Role> list = roleService.list(role);
-		return new ResultPage<Role>(list, HttpStatus.SEARCH);
+	public Result<List> list(@RequestBody Role role) {
+		List<Role> list = roleService.list(role);
+		return new Result<List>(list, HttpStatus.SEARCH);
 	}
 	
 	@GetMapping("/add")
@@ -43,10 +41,4 @@ public class RoleController {
 		return new Result(HttpStatus.UPDATE);
 	}
 	
-	@GetMapping("/listAll")
-	public Result<List> listAll() {
-		List<Role> list = roleService.listAll();
-		return new Result<List>(list, HttpStatus.SEARCH);
-	}
-
 }

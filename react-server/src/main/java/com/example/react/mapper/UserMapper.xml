@@ -11,7 +11,7 @@
     <result column="f_email" jdbcType="VARCHAR" property="email" />
     <result column="f_phone" jdbcType="VARCHAR" property="phone" />
     <result column="f_create_time" jdbcType="VARCHAR" property="createTime" />
-    <collection property="roles" column="f_id" select="com.example.react.mapper.RoleMapper.getUserRoles"/>
+    <collection property="roles" column="f_id" select="com.example.react.mapper.UserRoleMapper.getUserRoles"/>
   </resultMap>
   
   <select id="getUserInfo" resultMap="BaseResultMap">
@@ -38,3 +38,5 @@
   	delete from t_user where f_id = #{userId}
   </delete>
 </mapper>
+
+

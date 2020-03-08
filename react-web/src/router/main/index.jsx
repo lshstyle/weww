@@ -2,7 +2,6 @@ import React from 'react'
 import {Layout, message} from 'antd'
 import {Redirect,  Route,Switch} from 'react-router-dom'
 
-import {reqMenu} from '../../api'
 import memoryUtil from '../../utils/memoryUtil'
 import storageUtil from '../../utils/storageUtil'
 import httpStatus from '../../utils/httpStatus'

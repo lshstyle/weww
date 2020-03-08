@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.react.entity.Menu;
@@ -20,8 +21,8 @@ public class MenuController {
 	private MenuService menuService;
 	
 	@GetMapping("/list")
-	public Result<List> list() {
-		List<Menu> data = menuService.list();
+	public Result<List> list(@RequestParam("userId") String userId) {
+		List<Menu> data = menuService.list(userId);
 		return new Result<List>(data, HttpStatus.SEARCH);
 	}
 	

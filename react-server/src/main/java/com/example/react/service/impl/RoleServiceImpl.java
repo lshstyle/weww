@@ -21,10 +21,11 @@ public class RoleServiceImpl implements RoleService {
 	@Autowired
 	private RolePermissionMapper rolePermissionMapper;
 	
-	public PageInfo<Role> list(Role role) {
-		PageHelper.startPage(role.getPageNum(), role.getPageSize());
-		List<Role> list =  roleMapper.list();
-		return new PageInfo<Role>(list);
+	public List<Role> list(Role role) {
+		//PageHelper.startPage(role.getPageNum(), role.getPageSize());
+		//List<Role> list =  roleMapper.list();
+		//return new PageInfo<Role>(list);
+		return roleMapper.list();
 	}
 	
 	public void add(String name) {
@@ -43,10 +44,6 @@ public class RoleServiceImpl implements RoleService {
 	public void update(String id, String name) {
 		// TODO Auto-generated method stub
 		roleMapper.update(id, name);
-	}
-	
-	public List<Role> listAll() {
-		return roleMapper.list();
 	}
 	
 }

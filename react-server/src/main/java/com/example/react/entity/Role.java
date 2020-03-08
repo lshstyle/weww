@@ -2,7 +2,7 @@ package com.example.react.entity;
 
 import java.util.List;
 
-public class Role extends Page{
+public class Role{
 
 	private String id;
 	private String name;

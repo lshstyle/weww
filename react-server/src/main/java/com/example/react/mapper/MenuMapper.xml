@@ -9,12 +9,17 @@
     <result column="f_parent_id" jdbcType="VARCHAR" property="parentId" />
     <result column="f_index" jdbcType="INTEGER" property="index" />
     <result column="f_icon" jdbcType="VARCHAR" property="icon" />
+    <result column="f_is_public" jdbcType="VARCHAR" property="isPublic" />
   </resultMap>
   
   <select id="list" resultMap="BaseResultMap">
-    select f_id, f_title, f_path, f_parent_id, f_icon
-    from t_menu 
-    where f_is_enable = 1 
-    order by f_parent_id,f_index,f_id
+    select distinct m.f_id, m.f_title, m.f_path, m.f_parent_id, m.f_icon, m.f_is_public
+    from t_menu m
+    left join t_role_permission rp
+    on rp.f_menu_id = m.f_id
+    left join t_user_role r
+    on rp.f_role_id = r.f_role_id
+    where f_is_enable = 1 and (r.f_user_id = #{userId} or m.f_is_public = 1)
+    order by m.f_parent_id,m.f_index,m.f_id
   </select>
 </mapper>

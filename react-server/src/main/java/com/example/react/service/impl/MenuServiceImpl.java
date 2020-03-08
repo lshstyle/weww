@@ -17,9 +17,9 @@ public class MenuServiceImpl implements MenuService {
 	private MenuMapper menuMapper;
 	
 	@Override
-	public List<Menu> list() {
+	public List<Menu> list(String userId) {
 		// TODO Auto-generated method stub
-		List<Menu> list = menuMapper.list();
+		List<Menu> list = menuMapper.list(userId);
 		List<Menu> resultList = new ArrayList<Menu>();
 		warpperMenus(list, resultList);
 		return resultList;

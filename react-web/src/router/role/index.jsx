@@ -51,9 +51,9 @@ export default class Role extends React.Component {
         }
     }
 
-    getRoles = async (pageNum) => {
+    getRoles = async () => {
         this.setState({loading:true})
-        const result = await reqRoles(pageNum, this.state.pageSize)
+        const result = await reqRoles()
         this.setState({loading:false})
         if (result.code === httpStatus.SEARCH) {
             const roles = result.data
@@ -74,7 +74,7 @@ export default class Role extends React.Component {
                 const  result = await reqAddRole(name)
                 if (result.code === httpStatus.ADD) {
                     message.success('角色添加成功!')
-                    this.getRoles(1)
+                    this.getRoles()
                 } 
             }
         })

@@ -7,8 +7,6 @@ public interface UserService {
 	
 	PageInfo<User> list(User user);
 	
-	void add(User user);
-	
 	void delete(String userId);
 	
 	void update(User user);

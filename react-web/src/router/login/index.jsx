@@ -27,7 +27,7 @@ class Login extends React.Component {
                     memoryUtil.user = result.data
 
                     /*请求菜单 */
-                    const menuResult = await reqMenu()
+                    const menuResult = await reqMenu(memoryUtil.user.id)
                     if (menuResult.code === httpStatus.SEARCH) {
                         storageUtil.saveMenus(menuResult.data)
                         memoryUtil.menus = menuResult.data

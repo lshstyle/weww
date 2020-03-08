@@ -2,7 +2,7 @@ import React from 'react'
 import {Card, Button, Table, Modal,message} from 'antd'
 
 import LinkButton from '../../components/link-button'
-import {reqUsers, reqAddOrUpdateUser, reqDeleteUser} from '../../api'
+import {reqUsers, reqAddOrUpdateUser, reqDeleteUser,reqRoles} from '../../api'
 import httpStatus from '../../utils/httpStatus'
 import UserAddUpdate from './add-update'
 export default class User extends React.Component {
@@ -11,7 +11,8 @@ export default class User extends React.Component {
         isShow: false,
         users: [],
         pageSize: 5,
-        loading: false
+        loading: false,
+        roles: []
     }
 
     initColumns = () => {
@@ -28,20 +29,17 @@ export default class User extends React.Component {
             title: '注册时间',
             dataIndex: 'createTime'
         },{
-            title: '角色名称',
+            title: '所属角色',
             dataIndex: 'roles',
             render: (roles) => {
-                const roleNames = roles.map((role,index) => role.name)
-                return (
-                    roleNames.join()
-                )
+                return roles.map((roleId) => <label style={{marginRight:'10px'}}>{this.rolesName[roleId]}</label>)
             }
         },{
             title: '操作',
             render: (user) => {
                 return (
                     <span>
-                        <LinkButton>修改</LinkButton>
+                        <LinkButton onClick={() => {this.updateUser(user)}}>修改</LinkButton>
                         <LinkButton onClick={()=>{this.deleteUser(user)}}>删除</LinkButton>
                     </span>
                 )
@@ -59,6 +57,18 @@ export default class User extends React.Component {
         }
     }
 
+    getRoles = async() => {
+        const result = await reqRoles()
+        if (result.code === httpStatus.SEARCH) {
+            const roles = result.data
+            this.rolesName = roles.reduce((pre, role)=>{
+                pre[role.id] = role.name
+                return pre
+            }, {})
+            this.setState({roles})
+        }
+    }
+
     addOrUpdateUser = ()=> {
         this.form.validateFields(async (err, values) => {
             if (!err) {
@@ -68,6 +78,7 @@ export default class User extends React.Component {
                 })
                 //2.发请求
                 const  user = values
+                user.id = this.user.id
                 this.form.resetFields()
                 const  result = await reqAddOrUpdateUser(user)
                 if (result.code === httpStatus.UPDATE) {
@@ -94,6 +105,11 @@ export default class User extends React.Component {
         })
     }
 
+    updateUser = (user) => {
+        this.user = user
+        this.setState({isShow: true})
+    }
+
     componentDidMount() {
         this.getUsers(1)
     }
@@ -101,15 +117,18 @@ export default class User extends React.Component {
 
     componentWillMount() {
         this.initColumns()
+        this.getRoles()
     }
 
     render() {
+        const user = this.user
+       
         const title = (
             <span>
                 <Button type='primary' onClick={()=> this.setState({isShow: true})}>创建用户</Button>
             </span>
         )
-        const {loading, pageSize,users} = this.state
+        const {loading, pageSize,users,roles} = this.state
         return (
             <Card title={title}>
                 <Table 
@@ -121,13 +140,17 @@ export default class User extends React.Component {
                     pagination={{defaultPageSize: this.state.pageSize, showQuickJumper: true}}
                 />
                 <Modal
-                    title='添加用户'
+                    title={user? '修改用户' : '添加用户'}
                     visible={this.state.isShow}
                     onOk={this.addOrUpdateUser}
-                    onCancel={() => {this.setState({isShow:false})}}
+                    onCancel={() => {
+                        this.form.resetFields()
+                        this.setState({isShow:false})}}
                 >
                     <UserAddUpdate  
                         setForm = {(form) => {this.form = form}}
+                        roles = {roles}
+                        user = {user}
                     />
                 </Modal>
             </Card>

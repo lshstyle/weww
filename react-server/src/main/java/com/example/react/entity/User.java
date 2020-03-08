@@ -11,7 +11,7 @@ public class User extends Page{
 	private String realName;
 	private String phone;
 	private String email;
-	private List<Role> roles;
+	private List<String> roles;
 	private String createTime;
 	
 	public String getPhone() {
@@ -56,10 +56,11 @@ public class User extends Page{
 	public void setRealName(String realName) {
 		this.realName = realName;
 	}
-	public List<Role> getRoles() {
+	
+	public List<String> getRoles() {
 		return roles;
 	}
-	public void setRoles(List<Role> roles) {
+	public void setRoles(List<String> roles) {
 		this.roles = roles;
 	}
 	public String getCreateTime() {

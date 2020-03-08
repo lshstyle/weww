@@ -6,6 +6,6 @@ import com.example.react.entity.Menu;
 
 public interface MenuService {
 	
-	List<Menu> list();
+	List<Menu> list(String userId);
 
 }
