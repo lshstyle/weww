@@ -2,8 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {Form,Input,Select} from 'antd'
 
-import httpStatus from '../../utils/httpStatus'
-
 const Item = Form.Item
 const Option = Select.Option
 class UserAddUpdate extends React.Component {

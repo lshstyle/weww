@@ -1,6 +1,7 @@
 import React from 'react'
 import {withRouter} from 'react-router-dom'
 import {Modal} from 'antd'
+import {connect} from 'react-redux'
 
 import './index.less'
 import {formatDate} from '../../utils/dateUtil'
@@ -35,24 +36,24 @@ class Header extends React.Component {
         this.setState({dayPictureUrl, weather})
     }
 
-    getTitle = () => {
-        const path = this.props.location.pathname
+    // getTitle = () => {
+    //     const path = this.props.location.pathname
         
-        const menuList = memoryUtil.menus
-        let title
-        menuList.forEach(item => {
-            if (item.path === path) {
-                title = item.title
-            } else if (item.child){
-                const menu = item.child.find(cItem => cItem.key === path)
-                if (menu) {
-                    title = menu.title
-                }
-            }
-        })
+    //     const menuList = memoryUtil.menus
+    //     let title
+    //     menuList.forEach(item => {
+    //         if (item.path === path) {
+    //             title = item.title
+    //         } else if (item.child){
+    //             const menu = item.child.find(cItem => cItem.key === path)
+    //             if (menu) {
+    //                 title = menu.title
+    //             }
+    //         }
+    //     })
         
-        return title
-    }
+    //     return title
+    // }
 
     logout = () => {
         Modal.confirm({
@@ -74,7 +75,8 @@ class Header extends React.Component {
     render() {
         const {currTime, dayPictureUrl, weather} = this.state
         const userName = memoryUtil.user.name
-        const title = this.getTitle()
+        //const title = this.getTitle()
+        const title = this.props.headTitle
         return (
             <div className='header'>
                 <div className='header-top'>
@@ -95,4 +97,6 @@ class Header extends React.Component {
 
 }
 
-export default withRouter(Header)
+export default connect(
+    state =>({headTitle: state.headTitle}),
+)(withRouter(Header))

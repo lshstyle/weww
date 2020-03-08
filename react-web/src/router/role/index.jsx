@@ -133,7 +133,14 @@ export default class Role extends React.Component {
         return (
             <Card title={title}>
                 <Table
-                    rowSelection={{type: 'radio',selectedRowKeys: [role.id]}}
+                    rowSelection={{
+                        type: 'radio',
+                        selectedRowKeys: [role.id],
+                        onSelect: (role) => {
+                            this.setState({role})
+                        }
+                    }}
+                   
                     onRow={this.onRow}
                     columns={this.columns} 
                     dataSource={roles} 

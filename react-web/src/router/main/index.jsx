@@ -1,10 +1,8 @@
 import React from 'react'
-import {Layout, message} from 'antd'
+import {Layout} from 'antd'
 import {Redirect,  Route,Switch} from 'react-router-dom'
 
 import memoryUtil from '../../utils/memoryUtil'
-import storageUtil from '../../utils/storageUtil'
-import httpStatus from '../../utils/httpStatus'
 import LeftNav from '../../components/left-nav/index'
 import Header from '../../components/header/index'
 import Home from '../home'

@@ -1,6 +1,8 @@
 import React from 'react'
 import {Menu, Icon} from 'antd'
 import {Link, withRouter} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {setHeadTitle} from '../../redux/actions'
 
 import './index.less'
 import logo from '../../assets/images/favicon.ico'
@@ -15,9 +17,12 @@ class LeftNav extends React.Component {
         const path = this.props.location.pathname
         return menus.reduce((pre, menu) => {
             if (!menu.child) {
+                if (menu.path === path || path.indexOf(menu.path) >=0) {
+                    this.props.setHeadTitle(menu.title)
+                }
                 pre.push(
                     <Menu.Item key={menu.path}>
-                        <Link to={menu.path}>
+                        <Link to={menu.path} onClick={()=> {this.props.setHeadTitle(menu.title)}}>
                             <span>
                                 <Icon type={menu.icon} />
                                 <span>{menu.title}</span>
@@ -82,4 +87,7 @@ class LeftNav extends React.Component {
     }
 }
 
-export default withRouter(LeftNav)
+export default connect(
+    state => ({}),
+    {setHeadTitle}
+)(withRouter(LeftNav))

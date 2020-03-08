@@ -81,7 +81,7 @@ class ProudctAddUpdate extends React.Component {
         }))
 
         const {isUpdate, product} = this
-        const {parentCategory, category} = product
+        const {parentCategory} = product
         if (isUpdate && parentCategory !== '0') {
             const subCategorys = await this.getCategorys(parentCategory)
             const subOptions = subCategorys.map(c=>({

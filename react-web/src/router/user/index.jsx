@@ -128,7 +128,7 @@ export default class User extends React.Component {
                 <Button type='primary' onClick={()=> this.setState({isShow: true})}>创建用户</Button>
             </span>
         )
-        const {loading, pageSize,users,roles} = this.state
+        const {loading, users,roles} = this.state
         return (
             <Card title={title}>
                 <Table 

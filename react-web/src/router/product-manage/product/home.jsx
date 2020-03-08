@@ -82,6 +82,7 @@ export default class ProductHome extends React.Component {
     }
 
     getProducts = async (pageNum) => {
+        this.pageNum = pageNum
         this.setState({loading:true})
         const {defaultPageSize, searchType, searchName} = this.state
         const result = await reqProducts(pageNum, defaultPageSize,searchType, searchName)
@@ -132,6 +133,7 @@ export default class ProductHome extends React.Component {
                     dataSource={products}
                     columns={this.columns}
                     pagination = {{
+                        current: this.pageNum,
                         defaultPageSize, 
                         showQuickJumper: true, 
                         total,

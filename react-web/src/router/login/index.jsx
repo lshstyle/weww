@@ -16,7 +16,6 @@ class Login extends React.Component {
     
     handleSubmit = (event) => {
         event.preventDefault()
-        const form = this.props.form
         this.props.form.validateFields(async (err,values) => {
             if (!err) {
                 const {userName, password} = values

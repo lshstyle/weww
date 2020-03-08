@@ -11,8 +11,9 @@ import memoryUtils from './utils/memoryUtil'
 const user = storageUtils.getUser()
 memoryUtils.user = user
 
-ReactDOM.render(
+ReactDOM.render((
       <Provider store={store}>
             <App />
-      </Provider>, document.getElementById('root')
+      </Provider>
+), document.getElementById('root')
 )
