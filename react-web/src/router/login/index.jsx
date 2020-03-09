@@ -4,11 +4,8 @@ import {Form, Icon, Input, Button, message} from 'antd'
 
 import './index.less'
 
-import { reqLogin ,reqMenu} from '../../api/index'
-import memoryUtil from '../../utils/memoryUtil'
-import storageUtil from '../../utils/storageUtil'
-import httpStatus from '../../utils/httpStatus'
-
+import {connect} from 'react-redux'
+import {login} from '../../redux/actions'
 
 const Item = Form.Item
 
@@ -19,25 +16,9 @@ class Login extends React.Component {
         this.props.form.validateFields(async (err,values) => {
             if (!err) {
                 const {userName, password} = values
-                const result = await reqLogin(userName, password)
-                if (result.code === httpStatus.SEARCH) {
-                    message.success('登陆成功')
-                    storageUtil.saveUser(result.data)
-                    memoryUtil.user = result.data
-
-                    /*请求菜单 */
-                    const menuResult = await reqMenu(memoryUtil.user.id)
-                    if (menuResult.code === httpStatus.SEARCH) {
-                        storageUtil.saveMenus(menuResult.data)
-                        memoryUtil.menus = menuResult.data
-                    } else {
-                        message.error('获取菜单失败')
-                    }
-
-                    this.props.history.replace('/')
-                }
+                this.props.login(userName,password)
             } else {
-                message.error('登陆成功')
+                message.error('数据校验失败！')
             }
         })
     }
@@ -51,8 +32,8 @@ class Login extends React.Component {
     }
 
     render() {
-        const user = memoryUtil.user
-        if (user && user.userName) {
+        const user = this.props.user
+        if (user && user.id) {
             return (
                 <Redirect to='/' />
             )
@@ -62,9 +43,11 @@ class Login extends React.Component {
             <div className='login'>
                 <header className='login-header'></header>
                 <section className='login-content'>
+                    
                     <Form onSubmit={this.handleSubmit} className='login-form'>
                         <Item>
                             <h2>用户登录</h2>
+                            <span className={user.errorMsg? 'error-msg show' : 'error-msg'}>{user.errorMsg}</span>
                         </Item>
                         <Item>
                             {
@@ -108,9 +91,11 @@ class Login extends React.Component {
                 </footer>
             </div>
         )
-        
     }
 }
 
 const WarpLoginForm = Form.create()(Login)
-export default  WarpLoginForm
+export default  connect(
+    state => ({user: state.user}),
+    {login}
+)(WarpLoginForm)

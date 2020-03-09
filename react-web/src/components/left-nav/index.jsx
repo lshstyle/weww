@@ -6,10 +6,8 @@ import {setHeadTitle} from '../../redux/actions'
 
 import './index.less'
 import logo from '../../assets/images/favicon.ico'
-import memoryUtil from '../../utils/memoryUtil'
 
 const {SubMenu} = Menu
-
 
 class LeftNav extends React.Component {
 
@@ -39,10 +37,10 @@ class LeftNav extends React.Component {
                 pre.push(
                     <SubMenu key={menu.path}
                             title={
-                            <span>
-                                <Icon type={menu.icon} />
-                                <span>{menu.title}</span>
-                            </span>
+                                <span>
+                                    <Icon type={menu.icon} />
+                                    <span>{menu.title}</span>
+                                </span>
                             }
                     >
                     {
@@ -56,11 +54,12 @@ class LeftNav extends React.Component {
     }
 
     componentWillMount() {
-        const menus = memoryUtil.menus
+        const menus = this.props.menus
         this.menuNodes = this.showMenuNodes(menus)
     }
 
     render() {
+        
         let path = this.props.location.pathname
         if (path.indexOf('/product-manage/product') === 0) {
             path = '/product-manage/product'
@@ -88,6 +87,6 @@ class LeftNav extends React.Component {
 }
 
 export default connect(
-    state => ({}),
+    state => ({menus:state.menus}),
     {setHeadTitle}
 )(withRouter(LeftNav))

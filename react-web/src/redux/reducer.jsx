@@ -1,22 +1,17 @@
 /*
 根据老的state 和action 计算生成新的state
 */
-import { ADD_TODO, DELETE_TODO, SET_HEAD_TITLE} from './action-types'
+import {
+         SET_HEAD_TITLE,
+         RECEIVE_USER,
+         SHOW_USER_ERROR_MSG,
+         RECEIVE_MENUS,
+         SHOW_MENU_ERROR_MSG,
+         RESET_USER,
+         RESET_MENUS
+        } from './action-types'
 import storageUtil from '../utils/storageUtil'
 import {combineReducers} from 'redux'
-
-
-const initData = [
-    {date:'2019-12-12', time: '12:10:10', content:'1233232'}
-]
-
-function todos(state=initData, action) {
-    switch(action.type) {
-        case ADD_TODO : return [action.data, ...state] 
-        case DELETE_TODO : return state.filter((index) => index !== action.data)
-        default: return state
-    }
-}
 
 const initHeadTitle='首页'
 function headTitle(state=initHeadTitle, action) {
@@ -29,8 +24,27 @@ function headTitle(state=initHeadTitle, action) {
 const initUser= storageUtil.getUser()
 function user(state=initUser, action) {
     switch(action.type) {
+        case RECEIVE_USER: return action.user
+        case SHOW_USER_ERROR_MSG: 
+            const errorMsg = action.errorMsg
+            return {...state, errorMsg}
+        case RESET_USER:
+            return {}
         default: return state
     }
 }
 
-export default combineReducers({todos, headTitle, user})
+const initMenus = storageUtil.getMenus()
+function menus(state=initMenus, action) {
+    switch(action.type) {
+        case RECEIVE_MENUS: return action.menus
+        case SHOW_MENU_ERROR_MSG:
+            const errorMsg = action.errorMsg
+            return {...state, errorMsg}
+        case RESET_MENUS:
+            return []
+        default: return state
+    }
+}
+
+export default combineReducers({headTitle, user,menus})

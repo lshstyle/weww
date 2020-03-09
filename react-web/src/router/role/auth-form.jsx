@@ -2,13 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import {Form, Input, Tree} from 'antd'
-import memoryUtil from '../../utils/memoryUtil'
-
+import {connect} from 'react-redux'
 const Item = Form.Item
 
 const {TreeNode} = Tree
 
-export default class AuthForm extends React.Component {
+class AuthForm extends React.Component {
     
     static propTypes = {
         role: PropTypes.object.isRequired
@@ -16,7 +15,7 @@ export default class AuthForm extends React.Component {
 
     constructor(props) {
         super(props)
-        const menus = memoryUtil.menus
+        const menus = this.props.menus
         const checkedKeys = this.props.role.menus
         this.state={menus,checkedKeys}
     }
@@ -74,3 +73,7 @@ export default class AuthForm extends React.Component {
         )
     }
 }
+
+export default connect(
+    state => ({menus: state.menus})
+)(AuthForm)

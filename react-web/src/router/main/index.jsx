@@ -2,7 +2,6 @@ import React from 'react'
 import {Layout} from 'antd'
 import {Redirect,  Route,Switch} from 'react-router-dom'
 
-import memoryUtil from '../../utils/memoryUtil'
 import LeftNav from '../../components/left-nav/index'
 import Header from '../../components/header/index'
 import Home from '../home'
@@ -16,16 +15,26 @@ import Role from '../role'
 import Config from '../system/config'
 import Git from '../devlop/git'
 
+import {connect} from 'react-redux'
+import {getMenus} from '../../redux/actions'
+
 const {Footer, Sider, Content} = Layout
 
 
-export default class App extends React.Component {
+class App extends React.Component {
     
     render() {
-        const user = memoryUtil.user
-        if (!user || !user.name) {
+        const user = this.props.user
+        if (!user || !user.id) {
             return (
                 <Redirect to='/login' />
+            )
+        }
+        const menus = this.props.menus
+        if (menus.length ===0) {
+            this.props.getMenus(user.id)
+            return (
+                <Redirect to='/' />
             )
         }
         return (
@@ -34,7 +43,7 @@ export default class App extends React.Component {
                     <LeftNav/>
                 </Sider>
                 <Layout>
-                    <Header></Header>
+                    <Header />
                     <Content style={{margin:20,backgroundColor: '#fff'}}>
                         <Switch>
                             <Route path='/home' component={Home} />
@@ -57,3 +66,8 @@ export default class App extends React.Component {
         )
     }
 }
+
+export default connect(
+    state => ({user: state.user, menus: state.menus}),
+    {getMenus}
+)(App)

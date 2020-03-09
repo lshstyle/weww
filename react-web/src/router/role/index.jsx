@@ -1,13 +1,13 @@
 import React from 'react'
 import {Card, Button, Table, message, Modal} from 'antd'
+import {connect} from 'react-redux'
 
 import {reqRoles, reqAddRole,reqUpdateRoleAuth} from '../../api'
 import httpStatus from '../../utils/httpStatus'
 import AddForm from './add-form'
 import AuthForm from './auth-form'
-import memoryUtil from '../../utils/memoryUtil'
 
-export default class Role extends React.Component {
+class Role extends React.Component {
     
     state = {
         roles: [],
@@ -85,7 +85,7 @@ export default class Role extends React.Component {
         const menus = this.auth.current.getMenus()
         const role = this.state.role
         role.menus = menus
-        const user = memoryUtil.user
+        const user = this.props.user
         role.authId = user.id
         const result = await reqUpdateRoleAuth(role)
         if (result.code === httpStatus.UPDATE) {
@@ -171,3 +171,6 @@ export default class Role extends React.Component {
         )
     }
 }
+export default connect(
+    state => ({user: state.user})
+)(Role)

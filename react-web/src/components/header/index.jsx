@@ -2,11 +2,10 @@ import React from 'react'
 import {withRouter} from 'react-router-dom'
 import {Modal} from 'antd'
 import {connect} from 'react-redux'
+import {resetUser,resetMenus} from '../../redux/actions'
 
 import './index.less'
 import {formatDate} from '../../utils/dateUtil'
-import memoryUtil from '../../utils/memoryUtil'
-import storageUtil from '../../utils/storageUtil'
 import {reqWeather} from '../../api'
 import LinkButton from '../link-button'
 
@@ -36,34 +35,12 @@ class Header extends React.Component {
         this.setState({dayPictureUrl, weather})
     }
 
-    // getTitle = () => {
-    //     const path = this.props.location.pathname
-        
-    //     const menuList = memoryUtil.menus
-    //     let title
-    //     menuList.forEach(item => {
-    //         if (item.path === path) {
-    //             title = item.title
-    //         } else if (item.child){
-    //             const menu = item.child.find(cItem => cItem.key === path)
-    //             if (menu) {
-    //                 title = menu.title
-    //             }
-    //         }
-    //     })
-        
-    //     return title
-    // }
-
     logout = () => {
         Modal.confirm({
             content: '确定退出吗？',
             onOk: () => {
-              memoryUtil.user = {}
-              memoryUtil.menus = []
-              storageUtil.removeUser()
-              storageUtil.removeMenus()
-              this.props.history.replace('/login')
+              this.props.resetUser()
+              this.props.resetMenus()
             },
           })
     }
@@ -74,8 +51,7 @@ class Header extends React.Component {
 
     render() {
         const {currTime, dayPictureUrl, weather} = this.state
-        const userName = memoryUtil.user.name
-        //const title = this.getTitle()
+        const userName = this.props.user.name
         const title = this.props.headTitle
         return (
             <div className='header'>
@@ -98,5 +74,6 @@ class Header extends React.Component {
 }
 
 export default connect(
-    state =>({headTitle: state.headTitle}),
+    state =>({headTitle: state.headTitle, user: state.user}),
+    {resetUser, resetMenus}
 )(withRouter(Header))
