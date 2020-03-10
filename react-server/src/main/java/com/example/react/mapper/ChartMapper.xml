@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.react.mapper.ChartMapper">
+  <resultMap id="BaseResultMap" type="com.example.react.entity.Chart">
+   
+    <id column="f_id" jdbcType="VARCHAR" property="id" />
+    <result column="f_title" jdbcType="VARCHAR" property="title" />
+    <result column="f_math" jdbcType="FLOAT" property="math" />
+    <result column="f_chinese" jdbcType="FLOAT" property="chinese" />
+    <result column="f_english" jdbcType="FLOAT" property="english" />
+    <result column="f_history" jdbcType="FLOAT" property="history" />
+    <result column="f_physical" jdbcType="FLOAT" property="physical" />
+  </resultMap>
+  
+  <select id="list" resultMap="BaseResultMap">
+    select f_id, f_title, f_math,f_chinese,f_english,f_history,f_physical
+    from t_chart
+  </select>
+</mapper>

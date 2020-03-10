@@ -13,7 +13,7 @@ import {
 import storageUtil from '../utils/storageUtil'
 import {combineReducers} from 'redux'
 
-const initHeadTitle='首页'
+const initHeadTitle=''
 function headTitle(state=initHeadTitle, action) {
     switch(action.type) {
         case SET_HEAD_TITLE: return action.data

@@ -41,6 +41,8 @@ export const reqDeleteUser = (id) => ajax('/user/delete', {userId:id})
 
 export const reqAddOrUpdateUser = (user) => ajax('/user/update', user, 'POST')
 
+export const reqChart= () => ajax('/chart/list', {})
+
 export const reqWeather = (city) => {
     return new Promise((resolve, reject) => {
         const url = `http://api.map.baidu.com/telematics/v3/weather?location=${city}&output=json&ak=a4uGsIZfMvmah5LjZmiydyIm9du38Mdx`

@@ -1,13 +1,11 @@
 import React from 'react'
-import './index.less'
-
 import {Card, Button} from 'antd'
 import ReactEcharts from 'echarts-for-react'
 
 import {reqChart} from '../../api'
 import httpStatus from '../../utils/httpStatus'
 
-export default class Home extends React.Component {
+export default class Bar extends React.Component {
 
     state = {
         math: [],
@@ -39,7 +37,7 @@ export default class Home extends React.Component {
         }
     }
 
-    getOptionsBar = ()=> {
+    getOptions = ()=> {
         const  {math, title,chinese, physical, history, english} = this.state
         return {
             title: {
@@ -72,44 +70,6 @@ export default class Home extends React.Component {
             },{
                 name: '历史',
                 type: 'bar',
-                data: history
-            }]
-        }
-    }
-
-    getOptionsLine = ()=> {
-        const  {math, title,chinese, physical, history, english} = this.state
-        return {
-            title: {
-                text: '学生成绩表'
-            },
-            tooltip: {},
-            legend: {
-                data: ['数学','语文','英语','物理','历史']
-            },
-            xAxis: {
-                data: title
-            },
-            yAxis: {},
-            series: [{
-                name: '数学',
-                type: 'line',
-                data: math
-            },{
-                name: '语文',
-                type: 'line',
-                data: chinese
-            },{
-                name: '英语',
-                type: 'line',
-                data: english
-            },{
-                name: '物理',
-                type: 'line',
-                data: physical
-            },{
-                name: '历史',
-                type: 'line',
                 data: history
             }]
         }
@@ -132,14 +92,12 @@ export default class Home extends React.Component {
     render() {
         return (
             <div>
-                
+                <Card>
+                    <Button type='primary' onClick={this.update}>刷新</Button>
+                </Card>
                 <Card title='柱状图'>
-                    <ReactEcharts  option={this.getOptionsBar()} />
+                    <ReactEcharts  option={this.getOptions()} />
                 </Card>
-                <Card title='折线图'>
-                    <ReactEcharts  option={this.getOptionsLine()} />
-                </Card>
-                
             </div>
         )
     }

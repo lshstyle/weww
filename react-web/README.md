@@ -45,5 +45,9 @@ yarn add react-draft-wysiwyg draftjs-to-html
 安装react-redux
 yarn add redux react-redux redux-thunk  redux-devtools-extension
 
+安装echarts
+yarn add echarts-for-react  echarts
+
+
 
 

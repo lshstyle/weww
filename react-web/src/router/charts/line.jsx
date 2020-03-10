@@ -1,13 +1,11 @@
 import React from 'react'
-import './index.less'
-
 import {Card, Button} from 'antd'
 import ReactEcharts from 'echarts-for-react'
 
 import {reqChart} from '../../api'
 import httpStatus from '../../utils/httpStatus'
 
-export default class Home extends React.Component {
+export default class Line extends React.Component {
 
     state = {
         math: [],
@@ -39,45 +37,7 @@ export default class Home extends React.Component {
         }
     }
 
-    getOptionsBar = ()=> {
-        const  {math, title,chinese, physical, history, english} = this.state
-        return {
-            title: {
-                text: '学生成绩表'
-            },
-            tooltip: {},
-            legend: {
-                data: ['数学','语文','英语','物理','历史']
-            },
-            xAxis: {
-                data: title
-            },
-            yAxis: {},
-            series: [{
-                name: '数学',
-                type: 'bar',
-                data: math
-            },{
-                name: '语文',
-                type: 'bar',
-                data: chinese
-            },{
-                name: '英语',
-                type: 'bar',
-                data: english
-            },{
-                name: '物理',
-                type: 'bar',
-                data: physical
-            },{
-                name: '历史',
-                type: 'bar',
-                data: history
-            }]
-        }
-    }
-
-    getOptionsLine = ()=> {
+    getOptions = ()=> {
         const  {math, title,chinese, physical, history, english} = this.state
         return {
             title: {
@@ -132,14 +92,12 @@ export default class Home extends React.Component {
     render() {
         return (
             <div>
-                
-                <Card title='柱状图'>
-                    <ReactEcharts  option={this.getOptionsBar()} />
+                <Card>
+                    <Button type='primary' onClick={this.update}>刷新</Button>
                 </Card>
                 <Card title='折线图'>
-                    <ReactEcharts  option={this.getOptionsLine()} />
+                    <ReactEcharts  option={this.getOptions()} />
                 </Card>
-                
             </div>
         )
     }
